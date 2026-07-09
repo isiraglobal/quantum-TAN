@@ -1238,6 +1238,71 @@ a:hover { color: var(--accent-spore); }
   to { transform: rotate(360deg); }
 }
 
+/* Video Showcase */
+.video-showcase {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.video-player-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-player-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.video-download-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.video-info {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.video-download-btn {
+  padding: 10px 20px;
+  font-size: 0.8rem;
+}
+
+.video-download-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 768px) {
+  .video-download-bar {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .video-download-btn {
+    justify-content: center;
+  }
+}
+
 /* Animations */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px var(--glow-gold); }

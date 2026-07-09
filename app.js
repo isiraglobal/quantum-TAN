@@ -3,7 +3,7 @@
 
   // ====== Config ======
   const ADMIN_TOKEN_KEY = 'qaf_admin_token';
-  const API_BASE = '/api';
+  const API_BASE = 'YOUR_GOOGLE_SCRIPT_URL'; // Replace with deployed Google Apps Script URL
 
   // ====== DOM Cache ======
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
@@ -475,13 +475,13 @@
 
       try {
         const data = getFormData(dom.joinForm);
-        const res = await fetch(API_BASE + '/join-club', {
+        data.formType = 'join-club';
+        const res = await fetch(API_BASE, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-
-        if (!res.ok) throw new Error('Server error');
 
         showToast('Welcome to the club! Check your email for Discord invite.', 'success');
         dom.joinForm.reset();
@@ -568,6 +568,7 @@
 
       try {
         const data = getFormData(dom.applyForm);
+        data.formType = 'apply';
 
         // Convert resume to base64
         const file = resumeInput.files[0];
@@ -576,14 +577,14 @@
           reader.onload = function(ev) { resolve(ev.target.result.split(',')[1]); };
           reader.readAsDataURL(file);
         });
+        data.resumeFileName = file.name;
 
-        const res = await fetch(API_BASE + '/apply', {
+        const res = await fetch(API_BASE, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-
-        if (!res.ok) throw new Error('Server error');
 
         showToast("Application received! We'll be in touch soon.", 'success');
         dom.applyForm.reset();
@@ -645,13 +646,13 @@
 
       try {
         const data = getFormData(dom.contactForm);
-        const res = await fetch(API_BASE + '/contact', {
+        data.formType = 'contact';
+        const res = await fetch(API_BASE, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-
-        if (!res.ok) throw new Error('Server error');
 
         showToast("Message sent! We'll get back to you soon.", 'success');
         dom.contactForm.reset();

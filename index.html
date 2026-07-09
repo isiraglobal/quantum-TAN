@@ -25,6 +25,7 @@
         QuantumAggForage
       </a>
       <ul class="nav-links" role="menubar">
+        <li role="none"><a href="#video-section" role="menuitem" class="nav-link">Video</a></li>
         <li role="none"><a href="#mission" role="menuitem" class="nav-link">Mission</a></li>
         <li role="none"><a href="#services" role="menuitem" class="nav-link">Services</a></li>
         <li role="none"><a href="#locations" role="menuitem" class="nav-link">Locations</a></li>
@@ -41,6 +42,7 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#video-section">Video</a>
     <a href="#mission">Mission</a>
     <a href="#services">Services</a>
     <a href="#locations">Locations</a>
@@ -54,7 +56,7 @@
   <section id="hero" class="hero">
     <div class="hero-media active-canvas" id="heroMedia">
       <video autoplay muted loop playsinline preload="metadata" id="heroVideo">
-        <source src="https://www.pexels.com/download/video/4441327/" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/14264/14264-720.mp4" type="video/mp4">
       </video>
       <canvas id="heroCanvas"></canvas>
     </div>
@@ -78,6 +80,30 @@
     <div class="hero-scroll" aria-hidden="true">
       <span>Scroll</span>
       <svg viewBox="0 0 24 24"><path d="M7 13l5 5 5-5"/></svg>
+    </div>
+  </section>
+
+  <!-- Video Showcase -->
+  <section id="video-section" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Explore the Wild</h2>
+        <p>Watch our foraging expeditions and tutorials. Download to watch offline.</p>
+      </div>
+      <div class="video-showcase">
+        <div class="video-player-wrapper">
+          <video controls playsinline preload="metadata" id="showcaseVideo">
+            <source src="https://assets.mixkit.co/videos/14264/14264-720.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-download-bar">
+          <span class="video-info">Forest Walk — 720p HD (9.7 MB)</span>
+          <a href="https://assets.mixkit.co/videos/14264/14264-720.mp4" download="forest-walk.mp4" class="btn btn-primary video-download-btn">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download .MP4
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -657,20 +683,12 @@
           <h4>Connect</h4>
           <ul>
             <li><a href="https://discord.gg/rAArGGjpq" target="_blank" rel="noopener">Discord</a></li>
-            <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
-            <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; <span id="year"></span> QuantumAggForage. All rights reserved.</span>
-        <div class="footer-social">
-          <a href="https://discord.gg/rAArGGjpq" target="_blank" rel="noopener" aria-label="Discord">DC</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
-          <a href="#" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-        </div>
+
         <div class="footer-legal">
           <a href="#privacy" id="privacyLink">Privacy Policy</a>
           <a href="#terms" id="termsLink">Terms of Service</a>
