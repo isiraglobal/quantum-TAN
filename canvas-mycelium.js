@@ -249,10 +249,10 @@
   window.videoMycelium = createMycelium('videoMycCanvas', {
     nodeCount: 50,
     maxConnDist: 140,
-    colorBg: 'rgba(36, 52, 42, 0.55)',
-    colorNode: 'rgba(221, 214, 185, {a})',
-    colorConnection: 'rgba(147, 165, 141, {a})',
-    colorGlow: 'rgba(221, 214, 185, 0.04)',
+    useClearBg: true,
+    colorNode: 'rgba(62, 95, 68, {a})',
+    colorConnection: 'rgba(114, 137, 109, {a})',
+    colorGlow: 'rgba(62, 95, 68, 0.02)',
   });
 
 })();
