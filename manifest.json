@@ -1,0 +1,19 @@
+{
+  "name": "quantumaggforage",
+  "version": "1.0.0",
+  "description": "QuantumAggForage - From Beginner to Master Forager. Uniting foragers across NJ, PA, NY, FL through ethical wild harvesting, land stewardship, and community.",
+  "entry": "index.html",
+  "type": "combo",
+  "pulse": {
+    "entry": "src/server/index.ts",
+    "routes": [
+      "/api/join-club",
+      "/api/apply",
+      "/api/contact",
+      "/api/admin/export"
+    ]
+  },
+  "runtime": {
+    "framework": "vanilla"
+  }
+}

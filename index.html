@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumAggForage — From Beginner to Master Forager</title>
+  <meta name="description" content="QuantumAggForage unites foragers across NJ, PA, NY, FL through ethical wild harvesting, land stewardship, and community.">
+  <meta property="og:title" content="QuantumAggForage — From Beginner to Master Forager">
+  <meta property="og:description" content="Ethical wild harvesting, land stewardship, and community across NJ, PA, NY, and FL.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://plausible.io/js/script.js" data-domain="quantumaggforage.vxbe.space"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="QuantumAggForage Home">
+        <span class="nav-logo-icon">Q</span>
+        QuantumAggForage
+      </a>
+      <ul class="nav-links" role="menubar">
+        <li role="none"><a href="#mission" role="menuitem" class="nav-link">Mission</a></li>
+        <li role="none"><a href="#services" role="menuitem" class="nav-link">Services</a></li>
+        <li role="none"><a href="#locations" role="menuitem" class="nav-link">Locations</a></li>
+        <li role="none"><a href="#map-section" role="menuitem" class="nav-link">Map</a></li>
+        <li role="none"><a href="#join-club" role="menuitem" class="nav-link">Join</a></li>
+        <li role="none"><a href="#careers" role="menuitem" class="nav-link">Careers</a></li>
+        <li role="none"><a href="#contact" role="menuitem" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#mission">Mission</a>
+    <a href="#services">Services</a>
+    <a href="#locations">Locations</a>
+    <a href="#map-section">Map</a>
+    <a href="#join-club">Join Club</a>
+    <a href="#careers">Careers</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <div class="hero-media active-canvas" id="heroMedia">
+      <video autoplay muted loop playsinline preload="metadata" id="heroVideo">
+        <source src="https://www.pexels.com/download/video/4441327/" type="video/mp4">
+      </video>
+      <canvas id="heroCanvas"></canvas>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Forager Club — Est. 2025</div>
+      <h1>From Beginner to<br><span>Master Forager</span></h1>
+      <p>Uniting foragers across NJ, PA, NY, and FL through ethical wild harvesting, land stewardship, and community. Whether you're just starting or a seasoned expert, there's a place for you.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="scrollToSection('join-club')">Join the Club</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('services')">Our Services</button>
+      </div>
+    </div>
+
+    <div class="hero-toggle" role="group" aria-label="Media toggle">
+      <button class="active" data-mode="canvas" aria-pressed="true">Mycelium</button>
+      <button data-mode="video" aria-pressed="false">Video</button>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24"><path d="M7 13l5 5 5-5"/></svg>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="mission" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Mission</h2>
+        <p>To empower our communities with opportunities born from our collective unity and passion for foraging.</p>
+      </div>
+      <div class="mission-grid stagger-children">
+        <div class="mission-card">
+          <div class="mission-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+          </div>
+          <h3>Respect</h3>
+          <p>Leave no trace. Harvest ethically. Take only what's abundant and give back to the land that sustains us all.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Community</h3>
+          <p>Knowledge shared grows exponentially. We build bridges between beginners and masters across every region we serve.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3>Reciprocity</h3>
+          <p>From local parks to private lands, we steward the earth while creating business opportunities for foragers at every level.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>What We Do</h2>
+        <p>Business opportunities for master and beginner foragers alike — we are expanding across regions.</p>
+      </div>
+      <div class="services-grid stagger-children">
+        <div class="service-card">
+          <div class="badge badge-free">Free</div>
+          <h3>Wild Foraging Walks</h3>
+          <p>Join our free weekly guided foraging walks in local parks and preserves. Learn to identify, harvest, and prepare wild edibles — no experience needed.</p>
+          <ul class="service-list">
+            <li>Spring morels and ramps</li>
+            <li>Summer chanterelles and berries</li>
+            <li>Fall hen-of-the-woods and nuts</li>
+            <li>Winter oyster mushrooms</li>
+          </ul>
+          <button class="btn btn-secondary" onclick="scrollToSection('join-club')">Join a Walk</button>
+        </div>
+        <div class="service-card">
+          <div class="badge badge-paid">Paid Service</div>
+          <h3>Private Land Stewardship</h3>
+          <p>We partner with landowners, businesses, and chefs to assess, sustainably harvest, and manage private properties for wild edibles.</p>
+          <ul class="service-list">
+            <li>Property assessments &amp; harvest plans</li>
+            <li>Corporate team-building retreats</li>
+            <li>Wild-to-table chef partnerships</li>
+            <li>Restoration &amp; conservation consulting</li>
+          </ul>
+          <button class="btn btn-primary" onclick="scrollToSection('contact')">Schedule a Consultation</button>
+        </div>
+        <div class="service-card">
+          <div class="badge badge-free">Free</div>
+          <h3>Forager Club Community</h3>
+          <p>Connect with fellow foragers through Discord, skill-sharing workshops, member directories, and exclusive club events across all regions.</p>
+          <ul class="service-list">
+            <li>Member directory with skill badges</li>
+            <li>Discord community &amp; regional channels</li>
+            <li>Monthly ID workshops &amp; guest speakers</li>
+            <li>Supporter tier — $20 lifetime</li>
+          </ul>
+          <button class="btn btn-primary" onclick="scrollToSection('join-club')">Join Now</button>
+        </div>
+        <div class="service-card">
+          <div class="badge badge-free">Free</div>
+          <h3>Research &amp; Education</h3>
+          <p>We document and catalog finds, create educational resources, and contribute to citizen science. Help us build a living library of local flora.</p>
+          <ul class="service-list">
+            <li>Specimen bank with photos &amp; citations</li>
+            <li>Seasonal foraging calendars</li>
+            <li>Safety &amp; identification guides</li>
+            <li>Community-contributed knowledge base</li>
+          </ul>
+          <button class="btn btn-secondary" onclick="scrollToSection('join-club')">Contribute</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section id="locations" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Regions</h2>
+        <p>Active foraging communities across the Northeast and Southeast United States.</p>
+      </div>
+      <div class="locations-grid stagger-children">
+        <div class="location-card">
+          <div class="location-card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="0.5"/></svg>
+            </div>
+            <h3>New Jersey</h3>
+          </div>
+          <div class="location-card-body">
+            <div class="location-season">
+              <span>Spring</span>
+              <span>Summer</span>
+              <span>Fall</span>
+            </div>
+            <p style="color:var(--fg-muted);font-size:0.85rem;">Pine barrens mushrooms, coastal foraging, urban wilds. Weekly walks in state parks and preserves.</p>
+            <div class="location-details">
+              <strong>Key spots:</strong> Wharton State Forest, Delaware Water Gap, Pine Lands
+            </div>
+            <div class="card-expand">
+              <span>View details</span>
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+            </div>
+            <h3>Philadelphia</h3>
+          </div>
+          <div class="location-card-body">
+            <div class="location-season">
+              <span>Spring</span>
+              <span>Summer</span>
+              <span>Fall</span>
+              <span>Winter</span>
+            </div>
+            <p style="color:var(--fg-muted);font-size:0.85rem;">Wissahickon Valley, Fairmount Park, urban foraging corridors. Year-round activity with active meetups.</p>
+            <div class="location-details">
+              <strong>Key spots:</strong> Wissahickon Valley Park, Pennypack Park, John Heinz NWR
+            </div>
+            <div class="card-expand">
+              <span>View details</span>
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>New York</h3>
+          </div>
+          <div class="location-card-body">
+            <div class="location-season">
+              <span>Spring</span>
+              <span>Summer</span>
+              <span>Fall</span>
+            </div>
+            <p style="color:var(--fg-muted);font-size:0.85rem;">Catskills, Hudson Valley, Adirondack expeditions. Weekend foraging trips and intensive workshops.</p>
+            <div class="location-details">
+              <strong>Key spots:</strong> Catskill Park, Harriman State Park, Central Park (guided)
+            </div>
+            <div class="card-expand">
+              <span>View details</span>
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </div>
+            <h3>Florida</h3>
+          </div>
+          <div class="location-card-body">
+            <div class="location-season">
+              <span>Year-round</span>
+            </div>
+            <p style="color:var(--fg-muted);font-size:0.85rem;">Unique subtropical foraging: palms, sea grapes, mushrooms, native plants. Growing community with regular events.</p>
+            <div class="location-details">
+              <strong>Key spots:</strong> Ocala National Forest, Myakka River, Big Cypress Preserve
+            </div>
+            <div class="card-expand">
+              <span>View details</span>
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Map -->
+  <section id="map-section" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Find Your Forage</h2>
+        <p>Drop a pin to show where you forage and your travel range. Help us connect foragers with nearby teams and events. All location data is private — only team leads can see member areas.</p>
+      </div>
+      <div class="map-toolbar">
+        <button class="active" data-tool="pin" aria-pressed="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          Drop Pin
+        </button>
+        <button data-tool="radius" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/></svg>
+          Set Range
+        </button>
+        <button data-tool="heatmap" aria-pressed="false" style="display:none" id="heatmapToggle">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+          Heatmap
+        </button>
+        <button id="exportMap" style="margin-left:auto">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export GPX
+        </button>
+      </div>
+      <div class="map-wrapper">
+        <div id="map"></div>
+      </div>
+      <div class="map-instructions" id="mapInstructions">
+        Click on the map to drop your foraging pin. A circle will show your travel range. Drag the pin to adjust.
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Club -->
+  <section id="join-club" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Join the Forager Club</h2>
+        <p>Connect with foragers in your area. Share knowledge, find walks, and grow from beginner to master with a community that supports you.</p>
+      </div>
+      <form class="form-section" id="joinForm" novalidate>
+        <div class="form-group">
+          <label for="joinName">Name <span class="required">*</span></label>
+          <input type="text" id="joinName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
+          <div class="form-error" id="joinNameError">Please enter your name</div>
+        </div>
+        <div class="form-group">
+          <label for="joinEmail">Email <span class="required">*</span></label>
+          <input type="email" id="joinEmail" name="email" class="form-input" required autocomplete="email" placeholder="your@email.com">
+          <div class="form-error" id="joinEmailError">Please enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="joinPhone">Phone <span class="required">*</span></label>
+          <input type="tel" id="joinPhone" name="phone" class="form-input" required autocomplete="tel" placeholder="(555) 123-4567">
+          <div class="form-error" id="joinPhoneError">Please enter a valid phone number</div>
+        </div>
+        <div class="form-group">
+          <label for="joinLocation">Primary Location <span class="required">*</span></label>
+          <select id="joinLocation" name="location" class="form-select" required>
+            <option value="">Select your region...</option>
+            <option value="NJ">New Jersey</option>
+            <option value="PA">Pennsylvania / Philadelphia</option>
+            <option value="NY">New York</option>
+            <option value="FL">Florida</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="form-error" id="joinLocationError">Please select your location</div>
+        </div>
+        <div class="form-group">
+          <label for="joinTravel">Maximum Travel Distance <span class="required">*</span></label>
+          <select id="joinTravel" name="maxTravel" class="form-select" required>
+            <option value="">How far can you travel?</option>
+            <option value="10">10 miles</option>
+            <option value="25">25 miles</option>
+            <option value="50">50 miles</option>
+            <option value="75">75 miles</option>
+            <option value="100">100 miles</option>
+            <option value="200">200+ miles</option>
+          </select>
+          <div class="form-error" id="joinTravelError">Please select maximum travel distance</div>
+        </div>
+        <div class="form-group">
+          <label>Experience Level <span class="required">*</span></label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="experience" value="beginner" required>
+              <span class="form-radio-label">Beginner</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="experience" value="intermediate">
+              <span class="form-radio-label">Intermediate</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="experience" value="expert">
+              <span class="form-radio-label">Expert</span>
+            </label>
+          </div>
+          <div class="form-error" id="joinExperienceError">Please select your experience level</div>
+        </div>
+        <div class="form-group">
+          <label>Skills &amp; Interests</label>
+          <div class="form-checkbox-group">
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="mushrooms"><span class="form-checkbox-label">Mushrooms</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="plants"><span class="form-checkbox-label">Plants</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="trees"><span class="form-checkbox-label">Trees</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="fungi-id"><span class="form-checkbox-label">Fungi ID</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="cooking"><span class="form-checkbox-label">Cooking</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="preservation"><span class="form-checkbox-label">Preservation</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="teaching"><span class="form-checkbox-label">Teaching</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="skills" value="navigation"><span class="form-checkbox-label">Navigation</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="joinGoals">Goals &amp; Interests</label>
+          <textarea id="joinGoals" name="goals" class="form-textarea" placeholder="What brings you to the club? Any specific goals or interests..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">
+          <span class="submit-text">Join the Club</span>
+          <span class="spinner" style="display:none"></span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Careers -->
+  <section id="careers" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Join Our Team</h2>
+        <p>We're building a global network of foragers. If you're passionate about wild foods, community building, or scaling impact, we want to hear from you.</p>
+      </div>
+      <div class="careers-grid stagger-children">
+        <div class="role-card">
+          <h3>Lead Forager</h3>
+          <div class="role-type">Field Operations</div>
+          <p>Lead guided foraging walks, assess private properties, train associate foragers, and contribute to our specimen bank.</p>
+          <span class="role-comp">Equity / revenue-share / stipend based on role and commitment</span>
+          <div class="role-detail">
+            <h4>Requirements</h4>
+            <ul>
+              <li>3+ years foraging experience</li>
+              <li>Strong identification skills across 50+ species</li>
+              <li>First aid certification</li>
+              <li>Available weekends and select weekdays</li>
+            </ul>
+          </div>
+          <div class="card-expand">
+            <span>View requirements</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="role-card">
+          <h3>Foraging Associate</h3>
+          <div class="role-type">Field Operations</div>
+          <p>Support lead foragers during walks and property assessments. Great for intermediate foragers looking to deepen their skills.</p>
+          <span class="role-comp">Equity / revenue-share / stipend based on role and commitment</span>
+          <div class="role-detail">
+            <h4>Requirements</h4>
+            <ul>
+              <li>1+ year foraging experience</li>
+              <li>Basic identification skills</li>
+              <li>Enthusiasm for teaching beginners</li>
+              <li>Flexible availability</li>
+            </ul>
+          </div>
+          <div class="card-expand">
+            <span>View requirements</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="role-card">
+          <h3>Content Creator</h3>
+          <div class="role-type">Creative / Marketing</div>
+          <p>Create educational content, social media, field guides, and video documentation of our foraging expeditions and club activities.</p>
+          <span class="role-comp">Equity / revenue-share / stipend based on role and commitment</span>
+          <div class="role-detail">
+            <h4>Requirements</h4>
+            <ul>
+              <li>Photography / videography skills</li>
+              <li>Social media management experience</li>
+              <li>Passion for foraging and nature</li>
+              <li>Portfolio required</li>
+            </ul>
+          </div>
+          <div class="card-expand">
+            <span>View requirements</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="role-card">
+          <h3>VP of Business Development</h3>
+          <div class="role-type">Leadership</div>
+          <p>Drive our expansion across regions: partner with landowners, restaurants, brands, and conservation organizations to scale impact.</p>
+          <span class="role-comp">Equity / revenue-share / stipend based on role and commitment</span>
+          <div class="role-detail">
+            <h4>Requirements</h4>
+            <ul>
+              <li>5+ years business development experience</li>
+              <li>Network in food / hospitality / conservation</li>
+              <li>Experience scaling early-stage organizations</li>
+              <li>Passion for the foraging mission</li>
+            </ul>
+          </div>
+          <div class="card-expand">
+            <span>View requirements</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-section" id="applyForm" novalidate>
+        <h3 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:24px;color:var(--accent-gold);">Apply Now</h3>
+        <div class="form-group">
+          <label for="applyName">Name <span class="required">*</span></label>
+          <input type="text" id="applyName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
+          <div class="form-error" id="applyNameError">Please enter your name</div>
+        </div>
+        <div class="form-group">
+          <label for="applyEmail">Email <span class="required">*</span></label>
+          <input type="email" id="applyEmail" name="email" class="form-input" required autocomplete="email" placeholder="your@email.com">
+          <div class="form-error" id="applyEmailError">Please enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="applyPhone">Phone <span class="required">*</span></label>
+          <input type="tel" id="applyPhone" name="phone" class="form-input" required autocomplete="tel" placeholder="(555) 123-4567">
+          <div class="form-error" id="applyPhoneError">Please enter a valid phone number</div>
+        </div>
+        <div class="form-group">
+          <label for="applyRole">Role <span class="required">*</span></label>
+          <select id="applyRole" name="role" class="form-select" required>
+            <option value="">Select a role...</option>
+            <option value="lead-forager">Lead Forager</option>
+            <option value="foraging-associate">Foraging Associate</option>
+            <option value="content-creator">Content Creator</option>
+            <option value="vp-bizdev">VP of Business Development</option>
+          </select>
+          <div class="form-error" id="applyRoleError">Please select a role</div>
+        </div>
+        <div class="form-group">
+          <label for="applyLocation">Location Preference <span class="required">*</span></label>
+          <select id="applyLocation" name="locationPref" class="form-select" required>
+            <option value="">Preferred region...</option>
+            <option value="NJ">New Jersey</option>
+            <option value="PA">Pennsylvania / Philadelphia</option>
+            <option value="NY">New York</option>
+            <option value="FL">Florida</option>
+            <option value="remote">Remote</option>
+            <option value="any">Any</option>
+          </select>
+          <div class="form-error" id="applyLocationError">Please select a location preference</div>
+        </div>
+        <div class="form-group">
+          <label>Seasonal?</label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="seasonal" value="year-round" checked>
+              <span class="form-radio-label">Year-round</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="seasonal" value="seasonal">
+              <span class="form-radio-label">Seasonal only</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="applyResume">Resume <span class="required">*</span> <span style="color:var(--fg-dim);font-size:0.75rem;">(PDF, DOC, or DOCX — max 5MB)</span></label>
+          <div class="form-file">
+            <input type="file" id="applyResume" name="resume" class="form-file-input" accept=".pdf,.doc,.docx" required>
+            <div class="form-file-label">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload resume</span>
+            </div>
+          </div>
+          <div class="form-file-name" id="resumeFileName"></div>
+          <div class="form-error" id="applyResumeError">Please upload your resume</div>
+        </div>
+        <div class="form-group">
+          <label for="applyCover">Cover Letter <span class="required">*</span></label>
+          <textarea id="applyCover" name="coverLetter" class="form-textarea" required placeholder="Tell us why you're the right person for this role and what excites you about foraging..."></textarea>
+          <div class="form-error" id="applyCoverError">Please write a cover letter</div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">
+          <span class="submit-text">Submit Application</span>
+          <span class="spinner" style="display:none"></span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get in Touch</h2>
+        <p>Want to schedule a private forage, partner with us, or just say hello? Drop us a message.</p>
+      </div>
+      <form class="form-section" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="contactName">Name <span class="required">*</span></label>
+          <input type="text" id="contactName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
+          <div class="form-error" id="contactNameError">Please enter your name</div>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email <span class="required">*</span></label>
+          <input type="email" id="contactEmail" name="email" class="form-input" required autocomplete="email" placeholder="your@email.com">
+          <div class="form-error" id="contactEmailError">Please enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="contactPhone">Phone</label>
+          <input type="tel" id="contactPhone" name="phone" class="form-input" autocomplete="tel" placeholder="(555) 123-4567">
+        </div>
+        <div class="form-group">
+          <label>Inquiry Type</label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="general" checked>
+              <span class="form-radio-label">General</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="private-forage">
+              <span class="form-radio-label">Private Forage</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="corporate">
+              <span class="form-radio-label">Corporate</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="press">
+              <span class="form-radio-label">Press</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="partnership">
+              <span class="form-radio-label">Partnership</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message <span class="required">*</span></label>
+          <textarea id="contactMessage" name="message" class="form-textarea" required placeholder="Tell us how we can help..."></textarea>
+          <div class="form-error" id="contactMessageError">Please enter a message</div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">
+          <span class="submit-text">Send Message</span>
+          <span class="spinner" style="display:none"></span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>QuantumAggForage</h3>
+          <p>From Beginner to Master Forager. Empowering communities through ethical wild harvesting, land stewardship, and shared knowledge.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Foraging</h4>
+          <ul>
+            <li><a href="#services">Wild Walks</a></li>
+            <li><a href="#services">Land Stewardship</a></li>
+            <li><a href="#locations">Regions</a></li>
+            <li><a href="#map-section">Map</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Club</h4>
+          <ul>
+            <li><a href="#join-club">Join</a></li>
+            <li><a href="#join-club">Supporter Tier</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://discord.gg/rAArGGjpq" target="_blank" rel="noopener">Discord</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
+            <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> QuantumAggForage. All rights reserved.</span>
+        <div class="footer-social">
+          <a href="https://discord.gg/rAArGGjpq" target="_blank" rel="noopener" aria-label="Discord">DC</a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="#" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          <a href="#" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+        </div>
+        <div class="footer-legal">
+          <a href="#privacy" id="privacyLink">Privacy Policy</a>
+          <a href="#terms" id="termsLink">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" role="alert" aria-live="polite"></div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-label="Privacy Policy" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(10,15,10,0.95);backdrop-filter:blur(10px);overflow-y:auto;">
+    <div style="max-width:720px;margin:60px auto;padding:48px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);position:relative;">
+      <button onclick="closeModal('privacyModal')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--fg-muted);font-size:24px;cursor:pointer;">&times;</button>
+      <h2 style="font-family:var(--font-heading);font-size:2rem;color:var(--accent-gold);margin-bottom:24px;">Privacy Policy</h2>
+      <div style="color:var(--fg-muted);line-height:1.8;font-size:0.9rem;">
+        <p><strong>Last updated:</strong> June 2026</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">1. Information We Collect</h3>
+        <p>We collect information you voluntarily provide when you join our club, apply for a position, or contact us: name, email address, phone number, location, and any files you upload (e.g., resumes). We also collect map pin locations you choose to share.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">2. How We Use Your Information</h3>
+        <p>Your information is used to: operate our forager club (communications, event coordination, team matching), process job applications, respond to inquiries, improve our services, send occasional relevant communications (with opt-out available at any time).</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">3. Data Sharing</h3>
+        <p>We never sell your personal information. Data may be shared with: third-party service providers who help us operate (email delivery via Resend, Discord for community), team leads for coordination purposes, as required by law. Map location data is private by default and only accessible to team leads for operational purposes.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">4. Data Retention</h3>
+        <p>We retain your information for 12 months after your last interaction, after which it is anonymized. You may request deletion at any time.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">5. Your Rights</h3>
+        <p>You have the right to: access your personal data, request correction or deletion, withdraw consent at any time, export your data.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">6. Security</h3>
+        <p>We implement appropriate technical and organizational measures to protect your data. However, no method of transmission over the Internet is 100% secure.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">7. Age</h3>
+        <p>You must be 18 or older to join. If you are under 18, you need parental or guardian consent.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">8. Contact</h3>
+        <p>For privacy-related inquiries, contact us at privacy@quantumaggforage.com.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service Modal -->
+  <div class="modal-overlay" id="termsModal" role="dialog" aria-modal="true" aria-label="Terms of Service" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(10,15,10,0.95);backdrop-filter:blur(10px);overflow-y:auto;">
+    <div style="max-width:720px;margin:60px auto;padding:48px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);position:relative;">
+      <button onclick="closeModal('termsModal')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--fg-muted);font-size:24px;cursor:pointer;">&times;</button>
+      <h2 style="font-family:var(--font-heading);font-size:2rem;color:var(--accent-gold);margin-bottom:24px;">Terms of Service</h2>
+      <div style="color:var(--fg-muted);line-height:1.8;font-size:0.9rem;">
+        <p><strong>Last updated:</strong> June 2026</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">1. Acceptance</h3>
+        <p>By using QuantumAggForage services, you agree to these terms.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">2. Foraging Risks</h3>
+        <p>Foraging involves inherent risks including misidentification, uneven terrain, insect bites, and weather exposure. You participate at your own risk.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">3. Ethical Harvesting</h3>
+        <p>All members agree to: take only what is abundant, never harvest protected species, leave no trace, respect private property.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">4. Membership</h3>
+        <p>Membership is at-will. The Supporter tier ($20 lifetime) is non-refundable.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">5. Liability</h3>
+        <p>QuantumAggForage is not liable for damages arising from participation in foraging activities.</p>
+        <br>
+        <h3 style="color:var(--fg-primary);margin-bottom:8px;">6. Governing Law</h3>
+        <p>These terms are governed by the laws of the United States.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="canvas-mycelium.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
