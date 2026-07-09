@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — QuantumAggForage</title>
+  <meta name="description" content="Get in touch with QuantumAggForage. Schedule a private forage, partner with us, or just say hello.">
+  <meta property="og:title" content="Contact — QuantumAggForage">
+  <meta property="og:description" content="Get in touch with QuantumAggForage.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://plausible.io/js/script.js" data-domain="quantumaggforage.vxbe.space"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html#hero" class="nav-logo" aria-label="QuantumAggForage Home">
+        <span class="nav-logo-icon">Q</span>
+        QuantumAggForage
+      </a>
+      <ul class="nav-links" role="menubar">
+        <li role="none"><a href="index.html#video-section" role="menuitem" class="nav-link">Video</a></li>
+        <li role="none"><a href="index.html#mission" role="menuitem" class="nav-link">Mission</a></li>
+        <li role="none"><a href="index.html#services" role="menuitem" class="nav-link">Services</a></li>
+        <li role="none"><a href="index.html#locations" role="menuitem" class="nav-link">Locations</a></li>
+        <li role="none"><a href="index.html#map-section" role="menuitem" class="nav-link">Map</a></li>
+        <li role="none"><a href="index.html#join-club" role="menuitem" class="nav-link">Join</a></li>
+        <li role="none"><a href="index.html#careers" role="menuitem" class="nav-link">Careers</a></li>
+        <li role="none"><a href="contact.html" role="menuitem" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-cta" onclick="window.location.href='index.html#join-club'">Join the Club</button>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="index.html#video-section">Video</a>
+    <a href="index.html#mission">Mission</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#locations">Locations</a>
+    <a href="index.html#map-section">Map</a>
+    <a href="index.html#join-club">Join Club</a>
+    <a href="index.html#careers">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-bg-white fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get in Touch</h2>
+        <p>Want to schedule a private forage, partner with us, or just say hello? Drop us a message.</p>
+      </div>
+      <form class="form-section" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="contactName">Name <span class="required">*</span></label>
+          <input type="text" id="contactName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
+          <div class="form-error" id="contactNameError">Please enter your name</div>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email <span class="required">*</span></label>
+          <input type="email" id="contactEmail" name="email" class="form-input" required autocomplete="email" placeholder="your@email.com">
+          <div class="form-error" id="contactEmailError">Please enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="contactPhone">Phone</label>
+          <input type="tel" id="contactPhone" name="phone" class="form-input" autocomplete="tel" placeholder="(555) 123-4567">
+        </div>
+        <div class="form-group">
+          <label>Inquiry Type</label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="general" checked>
+              <span class="form-radio-label">General</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="private-forage">
+              <span class="form-radio-label">Private Forage</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="corporate">
+              <span class="form-radio-label">Corporate</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="press">
+              <span class="form-radio-label">Press</span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="inquiryType" value="partnership">
+              <span class="form-radio-label">Partnership</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message <span class="required">*</span></label>
+          <textarea id="contactMessage" name="message" class="form-textarea" required placeholder="Tell us how we can help..."></textarea>
+          <div class="form-error" id="contactMessageError">Please enter a message</div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">
+          <span class="submit-text">Send Message</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          <span class="spinner" style="display:none"></span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>QuantumAggForage</h3>
+          <p>From Beginner to Master Forager. Empowering communities through ethical wild harvesting, land stewardship, and shared knowledge.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Foraging</h4>
+          <ul>
+            <li><a href="index.html#services">Wild Walks</a></li>
+            <li><a href="index.html#locations">Regions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Club</h4>
+          <ul>
+            <li><a href="index.html#join-club">Join</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://discord.gg/rAArGGjpq" target="_blank" rel="noopener">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> QuantumAggForage. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#privacy" id="privacyLink">Privacy Policy</a>
+          <a href="#terms" id="termsLink">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer" role="alert" aria-live="polite"></div>
+
+  <div class="modal-overlay" id="privacyModal">
+    <div class="modal"><button class="modal-close" onclick="closeModal('privacyModal')">&times;</button><h2>Privacy Policy</h2><p>Last updated: 2025</p><p>We collect information you voluntarily provide when you join our club, apply for a position, or contact us: name, email address, phone number, location, and any files you upload (e.g., resumes). We also collect map pin locations you choose to share.</p><p>We use this data to operate the club, process applications, respond to inquiries, and improve our services. We do not sell your personal data to third parties.</p><p>We retain your data for as long as your account is active or as needed to provide services. You may request deletion by contacting us.</p><p>For questions, contact us through our website.</p></div>
+  </div>
+  <div class="modal-overlay" id="termsModal">
+    <div class="modal"><button class="modal-close" onclick="closeModal('termsModal')">&times;</button><h2>Terms of Service</h2><p>Last updated: 2025</p><p>By using QuantumAggForage, you agree to these terms. Our foraging walks and activities involve inherent risks including but not limited to: uneven terrain, weather conditions, wildlife encounters, and potential misidentification of wild edibles. Always consult a qualified expert before consuming any wild food.</p><p>Users must be 18+ or have parental consent. You agree to follow all local, state, and federal laws regarding foraging on public and private lands. You are responsible for obtaining proper permissions before foraging on private property.</p><p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of updated terms.</p></div>
+  </div>
+
+  <script defer src="canvas-mycelium.js"></script>
+  <script defer src="app.js"></script>
+</body>
+</html>

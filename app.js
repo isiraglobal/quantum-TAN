@@ -3,7 +3,7 @@
 
   // ====== Config ======
   const ADMIN_TOKEN_KEY = 'qaf_admin_token';
-  const API_BASE = 'YOUR_GOOGLE_SCRIPT_URL'; // Replace with deployed Google Apps Script URL
+  const API_BASE = 'https://script.google.com/macros/s/AKfycby6kcPiiVogv0eW28pp8-FDfIoNsv7QdPfJGjUqasz4YO8oFdcml55CxktgKHPqcJdUxg/exec';
 
   // ====== DOM Cache ======
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
@@ -14,7 +14,6 @@
     navToggle: $('.nav-toggle'),
     mobileMenu: $('.mobile-menu'),
     navLinks: $$('.nav-link'),
-    heroToggle: $$('.hero-toggle button'),
     heroMedia: $('#heroMedia'),
     year: $('#year'),
     toastContainer: $('#toastContainer'),
@@ -134,6 +133,15 @@
     });
   });
 
+  // Nav background on scroll
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 40) {
+      dom.nav.classList.add('scrolled');
+    } else {
+      dom.nav.classList.remove('scrolled');
+    }
+  });
+
   // Active nav link on scroll
   const sections = $$('section[id]');
   window.addEventListener('scroll', function() {
@@ -151,28 +159,6 @@
 
   // ====== Footer Year ======
   if (dom.year) dom.year.textContent = new Date().getFullYear();
-
-  // ====== Hero Toggle ======
-  dom.heroToggle.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      dom.heroToggle.forEach(function(b) {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      this.classList.add('active');
-      this.setAttribute('aria-pressed', 'true');
-      const mode = this.dataset.mode;
-      dom.heroMedia.className = 'hero-media' + (mode === 'canvas' ? ' active-canvas' : '');
-      if (mode === 'canvas') {
-        const video = dom.heroMedia.querySelector('video');
-        if (video) video.pause();
-        if (window.mycelium) window.mycelium.resize();
-      } else {
-        const video = dom.heroMedia.querySelector('video');
-        if (video) video.play().catch(function() {});
-      }
-    });
-  });
 
   // ====== Intersection Observer Animations ======
   if ('IntersectionObserver' in window) {
@@ -192,17 +178,134 @@
     $$('.fade-up, .stagger-children').forEach(function(el) { el.classList.add('visible'); });
   }
 
+  // ====== Mission Carousel ======
+  (function() {
+    var track = document.getElementById('missionTrack');
+    var dots = document.querySelectorAll('.mission-dot');
+    if (!track || !dots.length) return;
+
+    var cards = track.querySelectorAll('.mission-card');
+    var totalUnique = 3;
+    var currentIndex = 3; // Start at index 3 (Respect main card)
+    var interval = null;
+    var isPaused = false;
+    var isTransitioning = false;
+    var CARD_PCT = 100 / 3;
+
+    function setTrackTransform(offsetPct) {
+      track.style.transform = 'translateX(' + offsetPct + '%)';
+    }
+
+    function highlightCenter(centerIndex) {
+      cards.forEach(function(c, i) {
+        var isCenter = (i === centerIndex);
+        c.classList.toggle('center', isCenter);
+      });
+      // Active dot should correspond to the unique card index (0, 1, or 2)
+      var activeCard = cards[centerIndex];
+      if (activeCard) {
+        var uniqueCardIdx = parseInt(activeCard.dataset.card);
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === uniqueCardIdx);
+        });
+      }
+    }
+
+    function updateCarousel(index, animate) {
+      if (animate) {
+        track.style.transition = 'transform 1200ms cubic-bezier(0.22, 1, 0.36, 1)';
+        isTransitioning = true;
+      } else {
+        track.style.transition = 'none';
+      }
+
+      currentIndex = index;
+      var offset = -(currentIndex - 1) * CARD_PCT;
+      setTrackTransform(offset);
+      highlightCenter(currentIndex);
+    }
+
+    // Seamless warping after transition ends
+    track.addEventListener('transitionend', function() {
+      isTransitioning = false;
+      // If we move past index 5, warp back to main range by subtracting 3 indices
+      if (currentIndex >= 6) {
+        updateCarousel(currentIndex - 3, false); // Instant reset
+      }
+    });
+
+    function nextSlide() {
+      if (!isPaused && !isTransitioning) {
+        updateCarousel(currentIndex + 1, true);
+      }
+    }
+
+    function startAutoScroll() {
+      if (interval) clearInterval(interval);
+      interval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoScroll() {
+      if (interval) { clearInterval(interval); interval = null; }
+    }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        if (isTransitioning) return;
+        var targetUnique = parseInt(this.dataset.slide);
+        if (!isNaN(targetUnique)) {
+          stopAutoScroll();
+          
+          // Map click to the next occurrence of targetUnique >= currentIndex
+          var targetIndex = currentIndex;
+          while (targetIndex % totalUnique !== targetUnique) {
+            targetIndex++;
+          }
+          
+          // If they click the same dot as the current center card, do nothing
+          if (targetIndex !== currentIndex) {
+            updateCarousel(targetIndex, true);
+          }
+          
+          setTimeout(startAutoScroll, 6000);
+        }
+      });
+    });
+
+    var carousel = document.getElementById('missionCarousel');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', function() { isPaused = true; });
+      carousel.addEventListener('mouseleave', function() { isPaused = false; });
+    }
+
+    // Initialize instantly
+    updateCarousel(3, false);
+    startAutoScroll();
+  })();
+
   // ====== Location Cards ======
   dom.locationCards.forEach(function(card) {
     card.addEventListener('click', function() {
-      this.classList.toggle('expanded');
+      var wasExpanded = this.classList.contains('expanded');
+      dom.locationCards.forEach(function(c) {
+        c.classList.remove('expanded');
+      });
+      if (!wasExpanded) {
+        this.classList.add('expanded');
+      }
     });
   });
 
   // ====== Role Cards ======
   dom.roleCards.forEach(function(card) {
     card.addEventListener('click', function() {
-      this.classList.toggle('expanded');
+      var wasExpanded = this.classList.contains('expanded');
+      dom.roleCards.forEach(function(c) {
+        c.classList.remove('expanded');
+      });
+      if (!wasExpanded) {
+        this.classList.add('expanded');
+      }
     });
   });
 
@@ -280,12 +383,12 @@
     } else {
       userMarker = L.marker(latlng, {
         draggable: true,
-        icon: L.divIcon({
-          className: 'custom-marker',
-          html: '<div style="width:16px;height:16px;background:var(--accent-gold);border:2px solid var(--fg-primary);border-radius:50%;box-shadow:0 0 20px rgba(212,168,67,0.5);"></div>',
-          iconSize: [16, 16],
-          iconAnchor: [8, 8],
-        })
+          icon: L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="width:16px;height:16px;background:var(--hunter-green);border:2px solid var(--white);border-radius:50%;box-shadow:0 0 20px rgba(62,95,68,0.5);"></div>',
+            iconSize: [16, 16],
+            iconAnchor: [8, 8],
+          })
       }).addTo(map);
 
       userMarker.bindPopup('<b>Your Forage Spot</b><br>Drag to adjust.');
@@ -309,8 +412,8 @@
     } else {
       userCircle = L.circle(latlng, {
         radius: radiusMeters,
-        color: '#d4a843',
-        fillColor: 'rgba(212, 168, 67, 0.1)',
+        color: '#3E5F44',
+        fillColor: 'rgba(62, 95, 68, 0.1)',
         weight: 2,
         opacity: 0.6,
         fillOpacity: 0.15,
@@ -476,10 +579,9 @@
       try {
         const data = getFormData(dom.joinForm);
         data.formType = 'join-club';
-        const res = await fetch(API_BASE, {
+        await fetch(API_BASE, {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(data),
         });
 
@@ -579,10 +681,9 @@
         });
         data.resumeFileName = file.name;
 
-        const res = await fetch(API_BASE, {
+        await fetch(API_BASE, {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(data),
         });
 
@@ -647,10 +748,9 @@
       try {
         const data = getFormData(dom.contactForm);
         data.formType = 'contact';
-        const res = await fetch(API_BASE, {
+        await fetch(API_BASE, {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(data),
         });
 

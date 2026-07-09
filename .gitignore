@@ -1,3 +1,4 @@
 *.mp4
-!background.mp4
-!background.png
+!public/background.mp4
+!public/background.png
+.env

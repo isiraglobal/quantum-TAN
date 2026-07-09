@@ -32,8 +32,9 @@
         <li role="none"><a href="#map-section" role="menuitem" class="nav-link">Map</a></li>
         <li role="none"><a href="#join-club" role="menuitem" class="nav-link">Join</a></li>
         <li role="none"><a href="#careers" role="menuitem" class="nav-link">Careers</a></li>
-        <li role="none"><a href="#contact" role="menuitem" class="nav-link">Contact</a></li>
+        <li role="none"><a href="contact.html" role="menuitem" class="nav-link">Contact</a></li>
       </ul>
+      <button class="nav-cta" onclick="scrollToSection('join-club')">Join the Club</button>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -49,16 +50,15 @@
     <a href="#map-section">Map</a>
     <a href="#join-club">Join Club</a>
     <a href="#careers">Careers</a>
-    <a href="#contact">Contact</a>
+    <a href="contact.html">Contact</a>
   </div>
 
   <!-- Hero -->
   <section id="hero" class="hero">
-    <div class="hero-media active-canvas" id="heroMedia">
-      <video autoplay muted loop playsinline preload="metadata" id="heroVideo" poster="background.png">
-        <source src="background.mp4" type="video/mp4">
+    <div class="hero-media" id="heroMedia">
+      <video autoplay muted loop playsinline preload="metadata" id="heroVideo" poster="public/background.png">
+        <source src="public/background.mp4" type="video/mp4">
       </video>
-      <canvas id="heroCanvas"></canvas>
     </div>
     <div class="hero-overlay"></div>
 
@@ -67,14 +67,9 @@
       <h1>From Beginner to<br><span>Master Forager</span></h1>
       <p>Uniting foragers across NJ, PA, NY, and FL through ethical wild harvesting, land stewardship, and community. Whether you're just starting or a seasoned expert, there's a place for you.</p>
       <div class="hero-cta">
-        <button class="btn btn-primary" onclick="scrollToSection('join-club')">Join the Club</button>
-        <button class="btn btn-secondary" onclick="scrollToSection('services')">Our Services</button>
+        <button class="btn btn-hero-primary" onclick="scrollToSection('join-club')"><span class="btn-text">Join the Club</span><svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button>
+        <button class="btn btn-hero-secondary" onclick="scrollToSection('services')"><span class="btn-text">Our Services</span><svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button>
       </div>
-    </div>
-
-    <div class="hero-toggle" role="group" aria-label="Media toggle">
-      <button class="active" data-mode="canvas" aria-pressed="true">Mycelium</button>
-      <button data-mode="video" aria-pressed="false">Video</button>
     </div>
 
     <div class="hero-scroll" aria-hidden="true">
@@ -84,7 +79,9 @@
   </section>
 
   <!-- Video Showcase -->
-  <section id="video-section" class="section fade-up">
+  <section id="video-section" class="section section-video fade-up">
+    <canvas id="videoMycCanvas"></canvas>
+    <div class="section-video-overlay"></div>
     <div class="container">
       <div class="section-header">
         <h2>Explore the Wild</h2>
@@ -92,8 +89,8 @@
       </div>
       <div class="video-showcase">
         <div class="video-player-wrapper">
-          <video controls playsinline preload="metadata" id="showcaseVideo" poster="background.png">
-            <source src="background.mp4" type="video/mp4">
+          <video controls playsinline preload="metadata" id="showcaseVideo" poster="public/background.png">
+            <source src="public/background.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -101,40 +98,89 @@
   </section>
 
   <!-- Mission -->
-  <section id="mission" class="section fade-up">
+  <section id="mission" class="section section-bg-white fade-up">
     <div class="container">
       <div class="section-header">
         <h2>Our Mission</h2>
         <p>To empower our communities with opportunities born from our collective unity and passion for foraging.</p>
       </div>
-      <div class="mission-grid stagger-children">
-        <div class="mission-card">
-          <div class="mission-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+      <div class="mission-carousel" id="missionCarousel">
+        <div class="mission-track" id="missionTrack">
+          <div class="mission-card" data-card="0">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            </div>
+            <h3>Respect</h3>
+            <p>Leave no trace. Harvest ethically. Take only what's abundant and give back to the land that sustains us all.</p>
           </div>
-          <h3>Respect</h3>
-          <p>Leave no trace. Harvest ethically. Take only what's abundant and give back to the land that sustains us all.</p>
+          <div class="mission-card" data-card="1">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Community</h3>
+            <p>Knowledge shared grows exponentially. We build bridges between beginners and masters across every region we serve.</p>
+          </div>
+          <div class="mission-card" data-card="2">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h3>Reciprocity</h3>
+            <p>From local parks to private lands, we steward the earth while creating business opportunities for foragers at every level.</p>
+          </div>
+          <div class="mission-card" data-card="0">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            </div>
+            <h3>Respect</h3>
+            <p>Leave no trace. Harvest ethically. Take only what's abundant and give back to the land that sustains us all.</p>
+          </div>
+          <div class="mission-card" data-card="1">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Community</h3>
+            <p>Knowledge shared grows exponentially. We build bridges between beginners and masters across every region we serve.</p>
+          </div>
+          <div class="mission-card" data-card="2">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h3>Reciprocity</h3>
+            <p>From local parks to private lands, we steward the earth while creating business opportunities for foragers at every level.</p>
+          </div>
+          <div class="mission-card" data-card="0">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+            </div>
+            <h3>Respect</h3>
+            <p>Leave no trace. Harvest ethically. Take only what's abundant and give back to the land that sustains us all.</p>
+          </div>
+          <div class="mission-card" data-card="1">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Community</h3>
+            <p>Knowledge shared grows exponentially. We build bridges between beginners and masters across every region we serve.</p>
+          </div>
+          <div class="mission-card" data-card="2">
+            <div class="mission-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h3>Reciprocity</h3>
+            <p>From local parks to private lands, we steward the earth while creating business opportunities for foragers at every level.</p>
+          </div>
         </div>
-        <div class="mission-card">
-          <div class="mission-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <h3>Community</h3>
-          <p>Knowledge shared grows exponentially. We build bridges between beginners and masters across every region we serve.</p>
-        </div>
-        <div class="mission-card">
-          <div class="mission-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          </div>
-          <h3>Reciprocity</h3>
-          <p>From local parks to private lands, we steward the earth while creating business opportunities for foragers at every level.</p>
+        <div class="mission-dots" id="missionDots">
+          <button class="mission-dot active" data-slide="0" aria-label="Respect"></button>
+          <button class="mission-dot" data-slide="1" aria-label="Community"></button>
+          <button class="mission-dot" data-slide="2" aria-label="Reciprocity"></button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Services -->
-  <section id="services" class="section fade-up">
+  <section id="services" class="section section-bg-beige fade-up">
     <div class="container">
       <div class="section-header">
         <h2>What We Do</h2>
@@ -151,7 +197,7 @@
             <li>Fall hen-of-the-woods and nuts</li>
             <li>Winter oyster mushrooms</li>
           </ul>
-          <button class="btn btn-secondary" onclick="scrollToSection('join-club')">Join a Walk</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('join-club')"><span class="btn-text">Join a Walk</span><svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="service-card">
           <div class="badge badge-paid">Paid Service</div>
@@ -163,38 +209,14 @@
             <li>Wild-to-table chef partnerships</li>
             <li>Restoration &amp; conservation consulting</li>
           </ul>
-          <button class="btn btn-primary" onclick="scrollToSection('contact')">Schedule a Consultation</button>
-        </div>
-        <div class="service-card">
-          <div class="badge badge-free">Free</div>
-          <h3>Forager Club Community</h3>
-          <p>Connect with fellow foragers through Discord, skill-sharing workshops, member directories, and exclusive club events across all regions.</p>
-          <ul class="service-list">
-            <li>Member directory with skill badges</li>
-            <li>Discord community &amp; regional channels</li>
-            <li>Monthly ID workshops &amp; guest speakers</li>
-            <li>Supporter tier — $20 lifetime</li>
-          </ul>
-          <button class="btn btn-primary" onclick="scrollToSection('join-club')">Join Now</button>
-        </div>
-        <div class="service-card">
-          <div class="badge badge-free">Free</div>
-          <h3>Research &amp; Education</h3>
-          <p>We document and catalog finds, create educational resources, and contribute to citizen science. Help us build a living library of local flora.</p>
-          <ul class="service-list">
-            <li>Specimen bank with photos &amp; citations</li>
-            <li>Seasonal foraging calendars</li>
-            <li>Safety &amp; identification guides</li>
-            <li>Community-contributed knowledge base</li>
-          </ul>
-          <button class="btn btn-secondary" onclick="scrollToSection('join-club')">Contribute</button>
+          <button class="btn btn-primary" onclick="window.location.href='contact.html'"><span class="btn-text">Schedule a Consultation</span><svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Locations -->
-  <section id="locations" class="section fade-up">
+  <section id="locations" class="section section-bg-ivory fade-up">
     <div class="container">
       <div class="section-header">
         <h2>Our Regions</h2>
@@ -210,11 +232,11 @@
           </div>
           <div class="location-card-body">
             <div class="location-season">
-              <span>Spring</span>
-              <span>Summer</span>
-              <span>Fall</span>
+              <span class="season-tag season-spring">Spring</span>
+              <span class="season-tag season-summer">Summer</span>
+              <span class="season-tag season-fall">Fall</span>
             </div>
-            <p style="color:var(--fg-muted);font-size:0.85rem;">Pine barrens mushrooms, coastal foraging, urban wilds. Weekly walks in state parks and preserves.</p>
+            <p>Pine barrens mushrooms, coastal foraging, urban wilds. Weekly walks in state parks and preserves.</p>
             <div class="location-details">
               <strong>Key spots:</strong> Wharton State Forest, Delaware Water Gap, Pine Lands
             </div>
@@ -233,12 +255,12 @@
           </div>
           <div class="location-card-body">
             <div class="location-season">
-              <span>Spring</span>
-              <span>Summer</span>
-              <span>Fall</span>
-              <span>Winter</span>
+              <span class="season-tag season-spring">Spring</span>
+              <span class="season-tag season-summer">Summer</span>
+              <span class="season-tag season-fall">Fall</span>
+              <span class="season-tag season-winter">Winter</span>
             </div>
-            <p style="color:var(--fg-muted);font-size:0.85rem;">Wissahickon Valley, Fairmount Park, urban foraging corridors. Year-round activity with active meetups.</p>
+            <p>Wissahickon Valley, Fairmount Park, urban foraging corridors. Year-round activity with active meetups.</p>
             <div class="location-details">
               <strong>Key spots:</strong> Wissahickon Valley Park, Pennypack Park, John Heinz NWR
             </div>
@@ -257,11 +279,11 @@
           </div>
           <div class="location-card-body">
             <div class="location-season">
-              <span>Spring</span>
-              <span>Summer</span>
-              <span>Fall</span>
+              <span class="season-tag season-spring">Spring</span>
+              <span class="season-tag season-summer">Summer</span>
+              <span class="season-tag season-fall">Fall</span>
             </div>
-            <p style="color:var(--fg-muted);font-size:0.85rem;">Catskills, Hudson Valley, Adirondack expeditions. Weekend foraging trips and intensive workshops.</p>
+            <p>Catskills, Hudson Valley, Adirondack expeditions. Weekend foraging trips and intensive workshops.</p>
             <div class="location-details">
               <strong>Key spots:</strong> Catskill Park, Harriman State Park, Central Park (guided)
             </div>
@@ -280,9 +302,9 @@
           </div>
           <div class="location-card-body">
             <div class="location-season">
-              <span>Year-round</span>
+              <span class="season-tag season-year-round">Year-round</span>
             </div>
-            <p style="color:var(--fg-muted);font-size:0.85rem;">Unique subtropical foraging: palms, sea grapes, mushrooms, native plants. Growing community with regular events.</p>
+            <p>Unique subtropical foraging: palms, sea grapes, mushrooms, native plants. Growing community with regular events.</p>
             <div class="location-details">
               <strong>Key spots:</strong> Ocala National Forest, Myakka River, Big Cypress Preserve
             </div>
@@ -297,7 +319,7 @@
   </section>
 
   <!-- Interactive Map -->
-  <section id="map-section" class="section fade-up">
+  <section id="map-section" class="section section-bg-white fade-up">
     <div class="container">
       <div class="section-header">
         <h2>Find Your Forage</h2>
@@ -331,7 +353,7 @@
   </section>
 
   <!-- Join Club -->
-  <section id="join-club" class="section fade-up">
+  <section id="join-club" class="section section-bg-beige fade-up">
     <div class="container">
       <div class="section-header">
         <h2>Join the Forager Club</h2>
@@ -415,14 +437,15 @@
         </div>
         <button type="submit" class="btn btn-primary form-submit">
           <span class="submit-text">Join the Club</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           <span class="spinner" style="display:none"></span>
         </button>
       </form>
     </div>
   </section>
-
+  
   <!-- Careers -->
-  <section id="careers" class="section fade-up">
+  <section id="careers" class="section section-bg-ivory fade-up">
     <div class="container">
       <div class="section-header">
         <h2>Join Our Team</h2>
@@ -506,9 +529,17 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- Apply Now -->
+  <section id="apply-section" class="section section-bg-beige fade-up">
+    <div class="container">
+      <div class="section-header">
+        <h2>Apply Now</h2>
+        <p>Ready to join our team? Submit your application below and we'll be in touch.</p>
+      </div>
       <form class="form-section" id="applyForm" novalidate>
-        <h3 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:24px;color:var(--accent-gold);">Apply Now</h3>
         <div class="form-group">
           <label for="applyName">Name <span class="required">*</span></label>
           <input type="text" id="applyName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
@@ -562,7 +593,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="applyResume">Resume <span class="required">*</span> <span style="color:var(--fg-dim);font-size:0.75rem;">(PDF, DOC, or DOCX — max 5MB)</span></label>
+          <label for="applyResume">Resume <span class="required">*</span> <span style="color:var(--stone);font-size:14px;font-weight:400;">(PDF, DOC, or DOCX — max 5MB)</span></label>
           <div class="form-file">
             <input type="file" id="applyResume" name="resume" class="form-file-input" accept=".pdf,.doc,.docx" required>
             <div class="form-file-label">
@@ -580,71 +611,14 @@
         </div>
         <button type="submit" class="btn btn-primary form-submit">
           <span class="submit-text">Submit Application</span>
+          <svg class="btn-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           <span class="spinner" style="display:none"></span>
         </button>
       </form>
     </div>
   </section>
+  
 
-  <!-- Contact -->
-  <section id="contact" class="section fade-up">
-    <div class="container">
-      <div class="section-header">
-        <h2>Get in Touch</h2>
-        <p>Want to schedule a private forage, partner with us, or just say hello? Drop us a message.</p>
-      </div>
-      <form class="form-section" id="contactForm" novalidate>
-        <div class="form-group">
-          <label for="contactName">Name <span class="required">*</span></label>
-          <input type="text" id="contactName" name="name" class="form-input" required autocomplete="name" placeholder="Your full name">
-          <div class="form-error" id="contactNameError">Please enter your name</div>
-        </div>
-        <div class="form-group">
-          <label for="contactEmail">Email <span class="required">*</span></label>
-          <input type="email" id="contactEmail" name="email" class="form-input" required autocomplete="email" placeholder="your@email.com">
-          <div class="form-error" id="contactEmailError">Please enter a valid email</div>
-        </div>
-        <div class="form-group">
-          <label for="contactPhone">Phone</label>
-          <input type="tel" id="contactPhone" name="phone" class="form-input" autocomplete="tel" placeholder="(555) 123-4567">
-        </div>
-        <div class="form-group">
-          <label>Inquiry Type</label>
-          <div class="form-radio-group">
-            <label class="form-radio">
-              <input type="radio" name="inquiryType" value="general" checked>
-              <span class="form-radio-label">General</span>
-            </label>
-            <label class="form-radio">
-              <input type="radio" name="inquiryType" value="private-forage">
-              <span class="form-radio-label">Private Forage</span>
-            </label>
-            <label class="form-radio">
-              <input type="radio" name="inquiryType" value="corporate">
-              <span class="form-radio-label">Corporate</span>
-            </label>
-            <label class="form-radio">
-              <input type="radio" name="inquiryType" value="press">
-              <span class="form-radio-label">Press</span>
-            </label>
-            <label class="form-radio">
-              <input type="radio" name="inquiryType" value="partnership">
-              <span class="form-radio-label">Partnership</span>
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="contactMessage">Message <span class="required">*</span></label>
-          <textarea id="contactMessage" name="message" class="form-textarea" required placeholder="Tell us how we can help..."></textarea>
-          <div class="form-error" id="contactMessageError">Please enter a message</div>
-        </div>
-        <button type="submit" class="btn btn-primary form-submit">
-          <span class="submit-text">Send Message</span>
-          <span class="spinner" style="display:none"></span>
-        </button>
-      </form>
-    </div>
-  </section>
 
   <!-- Footer -->
   <footer class="footer" id="footer">
@@ -658,18 +632,14 @@
           <h4>Foraging</h4>
           <ul>
             <li><a href="#services">Wild Walks</a></li>
-            <li><a href="#services">Land Stewardship</a></li>
             <li><a href="#locations">Regions</a></li>
-            <li><a href="#map-section">Map</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Club</h4>
           <ul>
             <li><a href="#join-club">Join</a></li>
-            <li><a href="#join-club">Supporter Tier</a></li>
-            <li><a href="#careers">Careers</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -694,64 +664,64 @@
   <div class="toast-container" id="toastContainer" role="alert" aria-live="polite"></div>
 
   <!-- Privacy Policy Modal -->
-  <div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-label="Privacy Policy" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(10,15,10,0.95);backdrop-filter:blur(10px);overflow-y:auto;">
-    <div style="max-width:720px;margin:60px auto;padding:48px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);position:relative;">
-      <button onclick="closeModal('privacyModal')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--fg-muted);font-size:24px;cursor:pointer;">&times;</button>
-      <h2 style="font-family:var(--font-heading);font-size:2rem;color:var(--accent-gold);margin-bottom:24px;">Privacy Policy</h2>
-      <div style="color:var(--fg-muted);line-height:1.8;font-size:0.9rem;">
+  <div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-label="Privacy Policy">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('privacyModal')">&times;</button>
+      <h2>Privacy Policy</h2>
+      <div class="modal-body">
         <p><strong>Last updated:</strong> June 2026</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">1. Information We Collect</h3>
+        <h3>1. Information We Collect</h3>
         <p>We collect information you voluntarily provide when you join our club, apply for a position, or contact us: name, email address, phone number, location, and any files you upload (e.g., resumes). We also collect map pin locations you choose to share.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">2. How We Use Your Information</h3>
+        <h3>2. How We Use Your Information</h3>
         <p>Your information is used to: operate our forager club (communications, event coordination, team matching), process job applications, respond to inquiries, improve our services, send occasional relevant communications (with opt-out available at any time).</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">3. Data Sharing</h3>
+        <h3>3. Data Sharing</h3>
         <p>We never sell your personal information. Data may be shared with: third-party service providers who help us operate (email delivery via Resend, Discord for community), team leads for coordination purposes, as required by law. Map location data is private by default and only accessible to team leads for operational purposes.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">4. Data Retention</h3>
+        <h3>4. Data Retention</h3>
         <p>We retain your information for 12 months after your last interaction, after which it is anonymized. You may request deletion at any time.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">5. Your Rights</h3>
+        <h3>5. Your Rights</h3>
         <p>You have the right to: access your personal data, request correction or deletion, withdraw consent at any time, export your data.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">6. Security</h3>
+        <h3>6. Security</h3>
         <p>We implement appropriate technical and organizational measures to protect your data. However, no method of transmission over the Internet is 100% secure.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">7. Age</h3>
+        <h3>7. Age</h3>
         <p>You must be 18 or older to join. If you are under 18, you need parental or guardian consent.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">8. Contact</h3>
+        <h3>8. Contact</h3>
         <p>For privacy-related inquiries, contact us at privacy@quantumaggforage.com.</p>
       </div>
     </div>
   </div>
 
   <!-- Terms of Service Modal -->
-  <div class="modal-overlay" id="termsModal" role="dialog" aria-modal="true" aria-label="Terms of Service" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(10,15,10,0.95);backdrop-filter:blur(10px);overflow-y:auto;">
-    <div style="max-width:720px;margin:60px auto;padding:48px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);position:relative;">
-      <button onclick="closeModal('termsModal')" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--fg-muted);font-size:24px;cursor:pointer;">&times;</button>
-      <h2 style="font-family:var(--font-heading);font-size:2rem;color:var(--accent-gold);margin-bottom:24px;">Terms of Service</h2>
-      <div style="color:var(--fg-muted);line-height:1.8;font-size:0.9rem;">
+  <div class="modal-overlay" id="termsModal" role="dialog" aria-modal="true" aria-label="Terms of Service">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('termsModal')">&times;</button>
+      <h2>Terms of Service</h2>
+      <div class="modal-body">
         <p><strong>Last updated:</strong> June 2026</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">1. Acceptance</h3>
+        <h3>1. Acceptance</h3>
         <p>By using QuantumAggForage services, you agree to these terms.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">2. Foraging Risks</h3>
+        <h3>2. Foraging Risks</h3>
         <p>Foraging involves inherent risks including misidentification, uneven terrain, insect bites, and weather exposure. You participate at your own risk.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">3. Ethical Harvesting</h3>
+        <h3>3. Ethical Harvesting</h3>
         <p>All members agree to: take only what is abundant, never harvest protected species, leave no trace, respect private property.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">4. Membership</h3>
+        <h3>4. Membership</h3>
         <p>Membership is at-will. The Supporter tier ($20 lifetime) is non-refundable.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">5. Liability</h3>
+        <h3>5. Liability</h3>
         <p>QuantumAggForage is not liable for damages arising from participation in foraging activities.</p>
         <br>
-        <h3 style="color:var(--fg-primary);margin-bottom:8px;">6. Governing Law</h3>
+        <h3>6. Governing Law</h3>
         <p>These terms are governed by the laws of the United States.</p>
       </div>
     </div>
