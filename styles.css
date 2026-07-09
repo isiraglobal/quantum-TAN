@@ -1262,47 +1262,6 @@ a:hover { color: var(--accent-spore); }
   display: block;
 }
 
-.video-download-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 24px;
-  border-top: 1px solid var(--border-subtle);
-  flex-wrap: wrap;
-}
-
-.video-info {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-}
-
-.video-download-btn {
-  padding: 10px 20px;
-  font-size: 0.8rem;
-}
-
-.video-download-btn svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-@media (max-width: 768px) {
-  .video-download-bar {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-  .video-download-btn {
-    justify-content: center;
-  }
-}
-
 /* Animations */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px var(--glow-gold); }
