@@ -14,6 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script defer src="https://plausible.io/js/script.js" data-domain="quantumaggforage.vxbe.space"></script>
+  <!-- Vercel Analytics -->
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 <body>
 
@@ -117,6 +119,20 @@
   <!-- Footer -->
   <footer class="footer" id="footer">
     <div class="container">
+      <!-- Newsletter Strip -->
+      <div class="newsletter-strip">
+        <div class="newsletter-strip-text">
+          <h3>Stay in the Loop 🌿</h3>
+          <p>Foraging tips, seasonal guides &amp; community updates &mdash; straight to your inbox.</p>
+        </div>
+        <form class="newsletter-form" id="footerNewsletterForm" novalidate>
+          <input type="email" id="newsletterEmail" name="email" class="newsletter-input" placeholder="Your email address" autocomplete="email" required>
+          <button type="submit" class="newsletter-btn" id="newsletterSubmitBtn">
+            <span class="submit-text">Subscribe</span>
+            <span class="spinner" style="display:none"></span>
+          </button>
+        </form>
+      </div>
       <div class="footer-grid">
         <div class="footer-brand">
           <h3>QuantumAggForage</h3>
@@ -160,6 +176,36 @@
   </div>
   <div class="modal-overlay" id="termsModal">
     <div class="modal"><button class="modal-close" onclick="closeModal('termsModal')">&times;</button><h2>Terms of Service</h2><p>Last updated: 2025</p><p>By using QuantumAggForage, you agree to these terms. Our foraging walks and activities involve inherent risks including but not limited to: uneven terrain, weather conditions, wildlife encounters, and potential misidentification of wild edibles. Always consult a qualified expert before consuming any wild food.</p><p>Users must be 18+ or have parental consent. You agree to follow all local, state, and federal laws regarding foraging on public and private lands. You are responsible for obtaining proper permissions before foraging on private property.</p><p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of updated terms.</p></div>
+  </div>
+
+  <!-- Visitor Lead Capture Pop-up -->
+  <div class="lead-modal-overlay" id="leadModal" role="dialog" aria-modal="true" aria-label="Welcome to QuantumAggForage" aria-live="polite">
+    <div class="lead-modal-card">
+      <div class="lead-modal-header">
+        <span class="lead-modal-leaf" aria-hidden="true">🌿</span>
+        <h2 class="lead-modal-title">Welcome to QuantumAggForage</h2>
+        <p class="lead-modal-subtitle">Join our foraging community! Share your details to get personalized updates, event invites &amp; foraging tips. Totally optional &mdash; skip anytime.</p>
+      </div>
+      <form class="lead-modal-form" id="leadModalForm" novalidate>
+        <div class="lead-field-group">
+          <label for="leadName">Full Name</label>
+          <input type="text" id="leadName" name="name" class="lead-input" placeholder="Jane Forager" autocomplete="name">
+        </div>
+        <div class="lead-field-group">
+          <label for="leadEmail">Email Address</label>
+          <input type="email" id="leadEmail" name="email" class="lead-input" placeholder="jane@example.com" autocomplete="email">
+        </div>
+        <div class="lead-field-group">
+          <label for="leadPhone">Phone Number</label>
+          <input type="tel" id="leadPhone" name="phone" class="lead-input" placeholder="+1 (555) 000-0000" autocomplete="tel">
+        </div>
+        <button type="submit" class="lead-submit-btn" id="leadSubmitBtn">
+          <span class="submit-text">Join the Community</span>
+          <span class="spinner" style="display:none"></span>
+        </button>
+        <button type="button" class="lead-skip-btn" id="leadSkipBtn">No thanks, skip for now</button>
+      </form>
+    </div>
   </div>
 
   <script defer src="canvas-mycelium.js"></script>

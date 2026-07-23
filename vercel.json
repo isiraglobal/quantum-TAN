@@ -1,4 +1,7 @@
 {
   "cleanUrls": true,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/access", "destination": "/access.html" }
+  ]
 }

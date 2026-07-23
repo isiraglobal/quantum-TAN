@@ -1,5 +1,5 @@
 const SHEET_ID = '14kylR_XSPzBqYEhs1NLbC7u0hJdi4s1VOvM0eZeaOHE';
-const DISCORD_WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL_HERE'; // Set via script properties or paste URL here
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1524823032613437502/BQGJDShe_9c4RChmGMJFiOUV3sSBsCEckMj275Iqsj_Tt-Vp0btPAfxFmAtW8DMuNquA';
 
 function getSheetId() {
   try {
@@ -18,21 +18,30 @@ function getDiscordWebhookUrl() {
 }
 
 const SHEET_JOIN = 'JoinClub';
-const SHEET_APPLY = 'Applications';
 const SHEET_CONTACT = 'Contact';
+const SHEET_LEADS = 'VisitorLeads';
+const SHEET_NEWSLETTER = 'Newsletter';
+const SHEET_CONTRACTS = 'DomainContracts';
 
 const JOIN_HEADERS = [
   'Timestamp', 'Name', 'Email', 'Phone', 'Location',
   'MaxTravel', 'Experience', 'Skills', 'Goals'
 ];
 
-const APPLY_HEADERS = [
-  'Timestamp', 'Name', 'Email', 'Phone', 'Role',
-  'LocationPref', 'Seasonal', 'CoverLetter', 'ResumeFileName', 'ResumeData'
-];
-
 const CONTACT_HEADERS = [
   'Timestamp', 'Name', 'Email', 'Phone', 'InquiryType', 'Message'
+];
+
+const LEADS_HEADERS = [
+  'Timestamp', 'Name', 'Email', 'Phone', 'Page'
+];
+
+const NEWSLETTER_HEADERS = [
+  'Timestamp', 'Email'
+];
+
+const CONTRACTS_HEADERS = [
+  'Timestamp', 'Email', 'Domain', 'Accepted'
 ];
 
 function setup() {
@@ -40,15 +49,17 @@ function setup() {
   const ss = SpreadsheetApp.openById(sheetId);
 
   getOrCreateSheet(ss, SHEET_JOIN, JOIN_HEADERS);
-  getOrCreateSheet(ss, SHEET_APPLY, APPLY_HEADERS);
   getOrCreateSheet(ss, SHEET_CONTACT, CONTACT_HEADERS);
+  getOrCreateSheet(ss, SHEET_LEADS, LEADS_HEADERS);
+  getOrCreateSheet(ss, SHEET_NEWSLETTER, NEWSLETTER_HEADERS);
+  getOrCreateSheet(ss, SHEET_CONTRACTS, CONTRACTS_HEADERS);
 
   const sheetProps = PropertiesService.getScriptProperties();
   sheetProps.setProperty('SHEET_ID', sheetId);
   sheetProps.setProperty('DISCORD_WEBHOOK_URL', getDiscordWebhookUrl());
 
   return ContentService
-    .createTextOutput(JSON.stringify({ success: true, message: 'Sheets created and config saved.' }))
+    .createTextOutput(JSON.stringify({ success: true, message: 'Active sheets created and config saved.' }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -61,13 +72,22 @@ function doPost(e) {
       case 'join-club':
       case 'join':
         return handleJoinClub(data);
-      case 'apply':
-      case 'application':
-        return handleApplication(data);
       case 'contact':
       case 'contact-us':
         return handleContact(data);
+      case 'visitor-lead':
+        return handleVisitorLead(data);
+      case 'newsletter':
+        return handleNewsletter(data);
+      case 'domain-contract':
+      case 'domain-contracts':
+      case 'DomainContracts':
+      case 'domain_contract':
+        return handleDomainContract(data);
       default:
+        if (data.domain || data.accepted !== undefined) {
+          return handleDomainContract(data);
+        }
         return sendJson(400, { success: false, error: 'Unknown form type' });
     }
   } catch (err) {
@@ -113,44 +133,6 @@ function handleJoinClub(data) {
   return sendJson(200, { success: true, message: 'Welcome to the club!' });
 }
 
-function handleApplication(data) {
-  const ss = SpreadsheetApp.openById(getSheetId());
-  const sheet = getOrCreateSheet(ss, SHEET_APPLY, APPLY_HEADERS);
-
-  const row = [
-    new Date().toISOString(),
-    data.name || '',
-    data.email || '',
-    data.phone || '',
-    data.role || '',
-    data.locationPref || '',
-    data.seasonal || '',
-    data.coverLetter || '',
-    data.resumeFileName || '',
-    data.resumeBase64 || '',
-  ];
-  sheet.appendRow(row);
-
-  if (data.resumeBase64 && data.resumeFileName) {
-    saveResumeToDrive(data.resumeFileName, data.resumeBase64);
-  }
-
-  sendDiscordNotification({
-    color: 0xDDD6B9,
-    title: 'New Job Application',
-    fields: [
-      { name: 'Name', value: data.name || 'N/A', inline: true },
-      { name: 'Email', value: data.email || 'N/A', inline: true },
-      { name: 'Phone', value: data.phone || 'N/A', inline: true },
-      { name: 'Role', value: data.role || 'N/A', inline: true },
-      { name: 'Location', value: data.locationPref || 'N/A', inline: true },
-      { name: 'Resume', value: data.resumeFileName || 'N/A', inline: true },
-    ]
-  });
-
-  return sendJson(200, { success: true, message: 'Application received!' });
-}
-
 function handleContact(data) {
   const ss = SpreadsheetApp.openById(getSheetId());
   const sheet = getOrCreateSheet(ss, SHEET_CONTACT, CONTACT_HEADERS);
@@ -178,6 +160,78 @@ function handleContact(data) {
   });
 
   return sendJson(200, { success: true, message: 'Message sent!' });
+}
+
+function handleVisitorLead(data) {
+  const ss = SpreadsheetApp.openById(getSheetId());
+  const sheet = getOrCreateSheet(ss, SHEET_LEADS, LEADS_HEADERS);
+
+  const row = [
+    new Date().toISOString(),
+    data.name || '',
+    data.email || '',
+    data.phone || '',
+    data.page || 'unknown',
+  ];
+  sheet.appendRow(row);
+
+  sendDiscordNotification({
+    color: 0x5C775F,
+    title: '🌿 New Visitor Lead',
+    fields: [
+      { name: 'Name',  value: data.name  || 'N/A', inline: true },
+      { name: 'Email', value: data.email || 'N/A', inline: true },
+      { name: 'Phone', value: data.phone || 'N/A', inline: true },
+    ]
+  });
+
+  return sendJson(200, { success: true, message: 'Lead captured!' });
+}
+
+function handleNewsletter(data) {
+  const ss = SpreadsheetApp.openById(getSheetId());
+  const sheet = getOrCreateSheet(ss, SHEET_NEWSLETTER, NEWSLETTER_HEADERS);
+
+  const row = [
+    new Date().toISOString(),
+    data.email || '',
+  ];
+  sheet.appendRow(row);
+
+  sendDiscordNotification({
+    color: 0x93A58D,
+    title: '📧 New Newsletter Subscriber',
+    fields: [
+      { name: 'Email', value: data.email || 'N/A', inline: true },
+    ]
+  });
+
+  return sendJson(200, { success: true, message: 'Subscribed!' });
+}
+
+function handleDomainContract(data) {
+  const ss = SpreadsheetApp.openById(getSheetId());
+  const sheet = getOrCreateSheet(ss, SHEET_CONTRACTS, CONTRACTS_HEADERS);
+
+  const row = [
+    data.timestamp || new Date().toISOString(),
+    data.email || '',
+    data.domain || 'quantumaggforage.com',
+    String(data.accepted !== undefined ? data.accepted : true)
+  ];
+  sheet.appendRow(row);
+
+  sendDiscordNotification({
+    color: 0x3E5F44,
+    title: '📜 Provisional Contract Accepted',
+    fields: [
+      { name: 'Email', value: data.email || 'N/A', inline: true },
+      { name: 'Domain', value: data.domain || 'quantumaggforage.com', inline: true },
+      { name: 'Accepted', value: String(data.accepted !== undefined ? data.accepted : true), inline: true }
+    ]
+  });
+
+  return sendJson(200, { success: true, message: 'Contract accepted & signed!' });
 }
 
 function sendDiscordNotification(embed) {
@@ -212,6 +266,8 @@ function getOrCreateSheet(ss, name, headers) {
   let sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
+  }
+  if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
     sheet.setFrozenRows(1);
     const headerRange = sheet.getRange(1, 1, 1, headers.length);
@@ -220,38 +276,6 @@ function getOrCreateSheet(ss, name, headers) {
     headerRange.setFontColor('#FFFFFF');
   }
   return sheet;
-}
-
-function saveResumeToDrive(fileName, base64Data) {
-  try {
-    const folderName = 'QuantumAggForage_Resumes';
-    let folders = DriveApp.getFoldersByName(folderName);
-    let folder;
-    if (folders.hasNext()) {
-      folder = folders.next();
-    } else {
-      folder = DriveApp.createFolder(folderName);
-    }
-
-    const blob = Utilities.newBlob(
-      Utilities.base64Decode(base64Data),
-      getMimeType(fileName),
-      fileName
-    );
-    folder.createFile(blob);
-  } catch (err) {
-    console.error('Failed to save resume: ' + err.message);
-  }
-}
-
-function getMimeType(fileName) {
-  const ext = fileName.split('.').pop().toLowerCase();
-  const mimeMap = {
-    pdf: 'application/pdf',
-    doc: 'application/msword',
-    docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  };
-  return mimeMap[ext] || 'application/octet-stream';
 }
 
 function truncate(text, max) {

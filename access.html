@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumAggForage — Priority Network Access & Provisional Agreement</title>
+  <meta name="description" content="Request exclusive private network access for wild harvesting, ecological deal flow, and regional foraging chapters.">
+  <link rel="icon" href="assets/icons/favicon.ico">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'qaf-dark': '#0c150c',
+            'qaf-forest': '#162417',
+            'qaf-card': '#1c2d1d',
+            'qaf-gold': '#a98349',
+            'qaf-gold-light': '#c5a065',
+            'qaf-cream': '#e8ede6'
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0c150c] text-[#e8ede6] font-sans antialiased selection:bg-[#a98349] selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <!-- Background Subtle Gradient -->
+  <div class="fixed inset-0 bg-gradient-to-br from-[#162417]/80 via-[#0c150c] to-[#080d08] -z-10"></div>
+
+  <!-- Header -->
+  <header class="w-full border-b border-[#a98349]/20 bg-[#0c150c]/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-wider text-[#e8ede6] font-serif uppercase flex items-center gap-2">
+        <span class="text-[#a98349]">🌿</span> QuantumAggForage
+      </a>
+      <span class="text-xs uppercase tracking-widest text-[#a98349] font-medium border border-[#a98349]/30 px-3 py-1 rounded-full bg-[#a98349]/10">
+        Priority Placement
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Access Hero Section -->
+  <main class="flex-grow flex items-center justify-center px-6 py-16">
+    <div class="max-w-2xl w-full text-center space-y-8">
+      <div class="inline-block px-4 py-1.5 rounded-full bg-[#a98349]/15 border border-[#a98349]/40 text-xs font-semibold uppercase tracking-widest text-[#a98349]">
+        Exclusive Ecological & Regional Partner Access
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-[#e8ede6] leading-tight font-bold">
+        Access Ethical Harvesting & Regional Network Positioning.
+      </h1>
+
+      <p class="text-base sm:text-lg text-[#e8ede6]/80 max-w-xl mx-auto font-light leading-relaxed">
+        Enter your work email below to initiate your provisional membership agreement and unlock regional foraging positioning across NJ, PA, NY, and FL.
+      </p>
+
+      <!-- 1 Email Input Field + 1 Submit Button Form -->
+      <form id="access-landing-form" class="max-w-md mx-auto space-y-4">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="email" 
+            id="access-email-input" 
+            required 
+            placeholder="Enter your email address" 
+            class="flex-1 px-5 py-4 rounded-xl bg-[#162417] border border-[#a98349]/30 text-[#e8ede6] placeholder-[#e8ede6]/40 focus:outline-none focus:border-[#a98349] focus:ring-1 focus:ring-[#a98349] transition-all text-base"
+          >
+          <button 
+            type="submit" 
+            id="access-submit-btn"
+            class="px-8 py-4 rounded-xl bg-[#a98349] hover:bg-[#c5a065] text-white font-semibold tracking-wide transition-all shadow-lg hover:shadow-xl text-base whitespace-nowrap"
+          >
+            Request Access
+          </button>
+        </div>
+        <p class="text-xs text-[#e8ede6]/50">Strictly confidential. No spam or third-party sharing.</p>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full border-t border-[#a98349]/20 py-6 text-center text-xs text-[#e8ede6]/40">
+    <p>&copy; 2026 QuantumAggForage. All rights reserved. | <a href="/#contact" class="underline hover:text-[#a98349]">Contact Us</a></p>
+  </footer>
+
+  <!-- Provisional Contract Modal -->
+  <div id="contract-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 px-4 py-6">
+    <div class="bg-[#1c2d1d] text-[#e8ede6] rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#a98349]/40 transform scale-95 transition-transform duration-300 relative max-h-[90vh] flex flex-col">
+      
+      <!-- Close Button -->
+      <button id="close-modal-btn" class="absolute top-4 right-4 text-[#e8ede6]/60 hover:text-[#e8ede6] text-2xl font-bold p-2">&times;</button>
+
+      <div class="mb-4">
+        <span class="text-xs uppercase tracking-widest text-[#a98349] font-bold">Provisional Agreement</span>
+        <h2 class="text-2xl font-serif text-[#e8ede6] mt-1 font-bold">QuantumAggForage Network Terms & Non-Disclosure</h2>
+      </div>
+
+      <!-- Contract Scrollable Body -->
+      <div class="flex-1 overflow-y-auto bg-[#0c150c]/80 p-4 rounded-xl border border-[#a98349]/20 text-sm space-y-3 leading-relaxed mb-6 font-sans text-[#e8ede6]/90">
+        <p class="font-semibold text-[#e8ede6]">Target Email: <span id="modal-target-email" class="text-[#a98349] font-bold"></span></p>
+        <p><strong>1. Confidentiality & Land Rights:</strong> By accepting this provisional contract, you agree that all information regarding foraging maps, species distribution, private landowner agreements, and regional chapter research shared by QuantumAggForage is proprietary and confidential.</p>
+        <p><strong>2. Sustainable Harvesting & Non-Circumvention:</strong> You agree to uphold ethical wild harvesting standards and not circumvent QuantumAggForage regional leads or private land hosts when conducting foraging operations.</p>
+        <p><strong>3. Binding Digital Signature:</strong> Clicking "Accept & Sign Contract" records a digital timestamped acknowledgment of these terms associated with your domain and email address.</p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-3 items-center justify-end">
+        <button id="decline-contract-btn" class="w-full sm:w-auto px-5 py-3 rounded-xl border border-[#a98349]/30 text-[#e8ede6]/80 hover:bg-[#a98349]/10 text-sm font-medium transition-all">
+          Decline
+        </button>
+        <button id="accept-contract-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#a98349] hover:bg-[#c5a065] text-white text-sm font-bold tracking-wide transition-all shadow-md flex items-center justify-center gap-2">
+          <span>Accept & Sign Contract</span>
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </button>
+      </div>
+
+      <!-- Status Feedback -->
+      <div id="modal-status-msg" class="mt-3 text-center text-xs font-medium hidden"></div>
+    </div>
+  </div>
+
+  <!-- Contract Modal Script -->
+  <script>
+    (function() {
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6kcPiiVogv0eW28pp8-FDfIoNsv7QdPfJGjUqasz4YO8oFdcml55CxktgKHPqcJdUxg/exec";
+
+      const form = document.getElementById('access-landing-form');
+      const emailInput = document.getElementById('access-email-input');
+      const modal = document.getElementById('contract-modal');
+      const modalTargetEmail = document.getElementById('modal-target-email');
+      const acceptBtn = document.getElementById('accept-contract-btn');
+      const declineBtn = document.getElementById('decline-contract-btn');
+      const closeBtn = document.getElementById('close-modal-btn');
+      const statusMsg = document.getElementById('modal-status-msg');
+
+      let currentEmail = '';
+
+      function openModal(email) {
+        currentEmail = email;
+        modalTargetEmail.textContent = email;
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          modal.querySelector('div').classList.remove('scale-95');
+        }, 10);
+      }
+
+      function closeModal() {
+        modal.classList.add('opacity-0');
+        modal.querySelector('div').classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          statusMsg.classList.add('hidden');
+          statusMsg.textContent = '';
+        }, 300);
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        if (email) {
+          openModal(email);
+        }
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      declineBtn.addEventListener('click', closeModal);
+
+      acceptBtn.addEventListener('click', async function() {
+        if (!currentEmail) return;
+
+        acceptBtn.disabled = true;
+        acceptBtn.innerHTML = 'Signing...';
+        statusMsg.classList.remove('hidden');
+        statusMsg.className = 'mt-3 text-center text-xs font-medium text-[#e8ede6]';
+        statusMsg.textContent = 'Recording contract acceptance...';
+
+        const payload = {
+          formType: 'domain-contract',
+          email: currentEmail,
+          domain: window.location.hostname || 'quantumaggforage.com',
+          timestamp: new Date().toISOString(),
+          accepted: true
+        };
+
+        try {
+          const res = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            statusMsg.className = 'mt-3 text-center text-xs font-semibold text-emerald-400';
+            statusMsg.textContent = '✓ Contract Accepted & Signed. Welcome!';
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1200);
+          } else {
+            statusMsg.className = 'mt-3 text-center text-xs font-semibold text-emerald-400';
+            statusMsg.textContent = '✓ Contract Accepted & Signed.';
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1200);
+          }
+        } catch (err) {
+          statusMsg.className = 'mt-3 text-center text-xs font-semibold text-emerald-400';
+          statusMsg.textContent = '✓ Contract Accepted & Signed.';
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1200);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

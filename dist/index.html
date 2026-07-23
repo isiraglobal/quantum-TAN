@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QuantumAggForage — Ethical Wild Harvesting &amp; Community</title>
+    <meta name="description" content="QuantumAggForage connects wild harvesters, foragers, and mushroom enthusiasts across NJ, PA, NY, and FL.">
+    <meta property="og:site_name" content="QuantumAggForage">
+    <meta property="og:title" content="QuantumAggForage — Ethical Wild Harvesting &amp; Community">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/shareimage.jpg">
+    <link rel="icon" href="/assets/favicon-D83fWSxF.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-CZgAfsZr.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="QuantumAggForage home">
+        <span class="brand-title">QuantumAggForage</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" data-nav>
+        <a href="#immerseyourself">Immerse Yourself</a>
+        <a href="#process">Process</a>
+        <a href="#map-section">Map</a>
+        <a href="#getinvolved">Get Involved</a>
+        <a href="#contact">Contact &amp; Join</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="QuantumAggForage scroll animation" data-hero>
+        <canvas class="hero-canvas" width="1920" height="1080" data-hero-canvas></canvas>
+        <img class="hero-mobile" src="/assets/opening-sequence-mobile-3_2-CBJ67E0c.gif" alt="Foraging animation">
+      </section>
+
+      <section id="immerseyourself" class="immersive image-band dark-section">
+        <div class="section-grid immersive-grid">
+          <div class="immersive-copy">
+            <p class="eyebrow">IMMERSE YOURSELF</p>
+            <h2>Life begins below.</h2>
+            <div class="immersive-body">
+              <p>A mushroom is a door in the floor. Open it, and discover an endless, underground network that feeds life-giving essentials to the plants above. Microscopic highways of mycelium a million miles long run beneath, hidden from our eye. And there, in the dark tunnels of the underground, this vast, invisible network performs nature's alchemy, converting the many into one. An essential song that sustains all earthly life.</p>
+              <p>Enter QuantumAggForage and experience the life of wild fungi, from air-borne spore to underground mycelium to sprouting mushroom. Bring the forest to life, and discover the magical world beneath your feet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="process dark-section">
+        <div class="section-grid process-grid">
+          <div class="section-heading process-heading">
+            <p class="eyebrow">OUR PROCESS</p>
+            <h2>Uncovering the hidden story<br>under our feet through stewardship &amp; exploration.</h2>
+          </div>
+          <div class="section-body process-body">
+            <p>From ethical wild harvesting techniques to seasonal species identification across NJ, PA, NY, and FL.</p>
+            <p>We document, study, and forage local fungal diversity, bringing nature enthusiasts together to protect old-growth forests and foster sustainable foraging ecosystems.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Map Section -->
+      <section id="map-section" class="light-section map-section">
+        <div class="section-heading centered">
+          <p class="eyebrow">MAP</p>
+          <h2>Find Your Forage</h2>
+          <div class="section-body" style="max-width: 640px; margin: 0 auto 2rem; color: var(--ink);">
+            <p>Drop a pin to show where you forage and set your travel range. Team leads use this to connect you with nearby events and teams. All location data is private.</p>
+          </div>
+        </div>
+        <div class="section-grid" style="padding-top: 0; display: block;">
+          <div class="map-toolbar">
+            <button class="active" data-tool="pin" id="pinTool">Drop Pin</button>
+            <button data-tool="radius" id="radiusTool">Set Range</button>
+            <button id="removeMapPin" style="display:none;">Remove Pin</button>
+            <button id="exportMap" style="margin-left:auto;">Export GPX</button>
+          </div>
+          <div class="map-wrapper">
+            <div id="map"></div>
+          </div>
+          <div class="map-instructions" id="mapInstructions">Click on the map to drop your foraging pin. Drag to adjust.</div>
+        </div>
+      </section>
+
+      <section id="getinvolved" class="get-involved image-band dark-section">
+        <div class="section-grid get-involved-grid">
+          <div class="section-heading get-involved-copy">
+            <p class="eyebrow">GET INVOLVED</p>
+            <h2>You need fungi and fungi needs you.</h2>
+            <div class="section-body">
+              <p>The soil of old growth forests holds the key to human survival. Its fungi help us breathe, keep us fed, let us heal, and keep critical carbon in the ground. QuantumAggForage unites wild harvesters to protect habitats and share knowledge across our regional chapters.</p>
+            </div>
+            <div class="donate-button-wrap">
+              <a class="donate-button" href="#contact">JOIN THE CLUB</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section dark-section">
+        <div class="section-grid contact-grid">
+          <div class="section-heading contact-heading">
+            <p class="eyebrow">GET IN TOUCH</p>
+            <h2>Join the Club &amp; Connect</h2>
+            <p class="contact-intro">Whether you want to join QuantumAggForage, schedule a private walk, or get in touch — send us a message below.</p>
+          </div>
+          <form class="contact-form" id="contactForm" data-contact-form>
+            <div class="form-row-double">
+              <div class="form-group">
+                <label for="contactName">Full Name *</label>
+                <input id="contactName" name="name" type="text" placeholder="Your Full Name" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email Address *</label>
+                <input id="contactEmail" name="email" type="email" placeholder="your@email.com" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-row-double">
+              <div class="form-group">
+                <label for="contactPhone">Phone Number</label>
+                <input id="contactPhone" name="phone" type="tel" placeholder="(555) 123-4567" autocomplete="tel">
+              </div>
+              <div class="form-group">
+                <label for="contactLocation">Location</label>
+                <input id="contactLocation" name="location" type="text" placeholder="City, State (e.g. NJ, PA, NY, FL)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inquiryType">Inquiry Type</label>
+              <select id="inquiryType" name="inquiryType" class="form-select">
+                <option value="join">Join the Club</option>
+                <option value="general">General Inquiry</option>
+                <option value="private-forage">Private Forage</option>
+                <option value="corporate">Corporate Event</option>
+                <option value="partnership">Partnership</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message / Goals *</label>
+              <textarea id="contactMessage" name="message" rows="4" placeholder="Tell us about your foraging experience or goals..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="contactSubmitBtn">
+              <span class="btn-text">SUBMIT</span>
+              <span class="btn-spinner" style="display:none;">⏳</span>
+            </button>
+            <p class="form-feedback" id="contactFeedback" style="display:none;"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <p class="eyebrow">STAY IN TOUCH</p>
+          <div class="footer-copy">
+            <p>Subscribe for foraging tips, seasonal wild harvesting guides &amp; community updates across NJ, PA, NY &amp; FL.</p>
+          </div>
+          <div class="socials">
+            <a href="mailto:hello@quantumaggforage.com" aria-label="Email">
+              <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%20aria-hidden='true'%3e%3cpath%20fill='%23dacfc3'%20d='M17,22c0-1.657,1.343-3,3-3h24c1.657,0,3,1.343,3,3v20c0,1.657-1.343,3-3,3H20c-1.657,0-3-1.343-3-3V22z%20M20.875,22.5L32,31.169L43.125,22.5H20.875z%20M44,25.189L33.536,33.34c-0.902,0.703-2.169,0.703-3.071,0L20,25.189V42h24V25.189z'/%3e%3c/svg%3e" alt="Email">
+            </a>
+          </div>
+          <div class="footer-legal" style="margin-top: 1rem; font-size: 0.85rem;">
+            <a href="#" id="privacyLink">Privacy Policy</a> &bull; <a href="#" id="termsLink">Terms of Service</a>
+          </div>
+        </div>
+        <form class="signup-form" id="newsletterForm" data-signup-form>
+          <label for="newsletterEmail">Subscribe to Updates</label>
+          <div class="form-row">
+            <input id="newsletterEmail" name="email" type="email" autocomplete="email" placeholder="Email Address" required>
+            <button type="submit" id="newsletterSubmitBtn">SUBMIT</button>
+          </div>
+          <p class="form-feedback" id="newsletterFeedback" style="display:none;"></p>
+          <p>We promise not to share your email or spam you!</p>
+        </form>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="footerYear"></span> QuantumAggForage. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal-overlay" id="privacyModal" style="display:none;">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('privacyModal')">&times;</button>
+        <h2>Privacy Policy</h2>
+        <div class="modal-body">
+          <p><strong>Last updated:</strong> June 2026</p>
+          <h3>1. Information We Collect</h3>
+          <p>We collect information you voluntarily provide when you join our club, apply for a position, or contact us: name, email address, phone number, location. Map pin locations are stored locally in your browser and shared only if submitted.</p>
+          <h3>2. Data Retention</h3>
+          <p>We retain your information for operational event coordination. You may request deletion at any time.</p>
+          <h3>3. Contact</h3>
+          <p>For privacy inquiries, reach out through our contact form.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="modal-overlay" id="termsModal" style="display:none;">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('termsModal')">&times;</button>
+        <h2>Terms of Service</h2>
+        <div class="modal-body">
+          <p><strong>Last updated:</strong> June 2026</p>
+          <h3>1. Foraging Safety</h3>
+          <p>Foraging involves inherent risks. Always verify plant and fungi identifications with experienced foragers before consuming.</p>
+          <h3>2. Ethical Harvesting</h3>
+          <p>Respect local habitats, harvest sustainably, take only what is abundant, and obtain required permits on public/private lands.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visitor Lead Modal Popup -->
+    <div class="lead-modal-overlay" id="leadModal" role="dialog" aria-modal="true" aria-label="Welcome to QuantumAggForage">
+      <div class="lead-modal-card">
+        <button type="button" class="lead-modal-close" id="leadCloseBtn" aria-label="Close modal">&times;</button>
+        <div class="lead-modal-header">
+          <span class="lead-modal-leaf" aria-hidden="true">🌿</span>
+          <h2 class="lead-modal-title">Welcome to QuantumAggForage</h2>
+          <p class="lead-modal-subtitle">Join our foraging community! Share your details for event invites, foraging tips &amp; seasonal guides.</p>
+        </div>
+        <form class="lead-modal-form" id="leadModalForm" novalidate>
+          <div class="lead-field-group">
+            <label for="leadName">Full Name</label>
+            <input type="text" id="leadName" name="name" class="lead-input" placeholder="Jane Forager" autocomplete="name" required>
+          </div>
+          <div class="lead-field-group">
+            <label for="leadEmail">Email Address</label>
+            <input type="email" id="leadEmail" name="email" class="lead-input" placeholder="jane@example.com" autocomplete="email" required>
+          </div>
+          <div class="lead-field-group">
+            <label for="leadPhone">Phone Number</label>
+            <input type="tel" id="leadPhone" name="phone" class="lead-input" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+          <button type="submit" class="lead-submit-btn" id="leadSubmitBtn">
+            <span class="submit-text">JOIN THE COMMUNITY</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer" role="alert" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
