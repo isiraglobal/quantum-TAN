@@ -129,8 +129,29 @@
                 <input id="contactPhone" name="phone" type="tel" placeholder="(555) 123-4567" autocomplete="tel">
               </div>
               <div class="form-group">
-                <label for="contactLocation">Location</label>
-                <input id="contactLocation" name="location" type="text" placeholder="City, State (e.g. NJ, PA, NY, FL)">
+                <label>Region</label>
+                <div class="form-radio-group">
+                  <label class="form-radio">
+                    <input type="radio" name="location" value="NJ">
+                    <span class="form-radio-label">NJ</span>
+                  </label>
+                  <label class="form-radio">
+                    <input type="radio" name="location" value="PA">
+                    <span class="form-radio-label">PA</span>
+                  </label>
+                  <label class="form-radio">
+                    <input type="radio" name="location" value="NY">
+                    <span class="form-radio-label">NY</span>
+                  </label>
+                  <label class="form-radio">
+                    <input type="radio" name="location" value="FL">
+                    <span class="form-radio-label">FL</span>
+                  </label>
+                  <label class="form-radio">
+                    <input type="radio" name="location" value="other" checked>
+                    <span class="form-radio-label">Other</span>
+                  </label>
+                </div>
               </div>
             </div>
             <div class="form-group">
