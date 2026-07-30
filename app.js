@@ -1,112 +1,9 @@
 (function () {
-  var hero = document.querySelector("[data-hero]");
-  var canvas = document.querySelector("[data-hero-canvas]");
   var header = document.querySelector("[data-header]");
   var menuToggle = document.querySelector("[data-menu-toggle]");
   var nav = document.querySelector("[data-nav]");
-  var frameCount = 291;
-  var images = [];
-  var currentFrame = -1;
   var lastScrollY = window.scrollY;
   var headerHideThreshold = 80;
-
-  function framePath(index) {
-    return "assets/animation/hero/" + String(index).padStart(4, "0") + ".jpg";
-  }
-
-  function drawFrame(index) {
-    if (!canvas || window.matchMedia("(max-width: 900px)").matches) {
-      return;
-    }
-
-    var img = images[index];
-    if (!img || !img.complete) {
-      return;
-    }
-
-    var context = canvas.getContext("2d");
-    var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-    var width = img.width * scale;
-    var height = img.height * scale;
-    var x = (canvas.width - width) / 2;
-    var y = (canvas.height - height) / 2;
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(img, x, y, width, height);
-  }
-
-  function loadFrame(index, drawWhenLoaded) {
-    if (images[index]) {
-      if (drawWhenLoaded) {
-        drawFrame(index);
-      }
-      return;
-    }
-
-    var img = new Image();
-    img.src = framePath(index);
-    if (drawWhenLoaded) {
-      img.onload = function () {
-        drawFrame(index);
-      };
-    }
-    images[index] = img;
-  }
-
-  function resizeHeroCanvas() {
-    if (!canvas || window.matchMedia("(max-width: 900px)").matches) {
-      return;
-    }
-
-    var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    var width = Math.round(window.innerWidth * pixelRatio);
-    var height = Math.round(window.innerHeight * pixelRatio);
-
-    if (canvas.width !== width || canvas.height !== height) {
-      canvas.width = width;
-      canvas.height = height;
-      drawFrame(currentFrame);
-    }
-  }
-
-  function preloadHero() {
-    if (!hero || !canvas || window.matchMedia("(max-width: 900px)").matches) {
-      return;
-    }
-
-    resizeHeroCanvas();
-    loadFrame(0, true);
-
-    var index = 1;
-    var preloadBatch = function () {
-      var limit = Math.min(index + 8, frameCount);
-      for (; index < limit; index += 1) {
-        loadFrame(index, false);
-      }
-      if (index < frameCount) {
-        window.setTimeout(preloadBatch, 90);
-      }
-    };
-    preloadBatch();
-  }
-
-  function updateHero() {
-    if (!hero || !canvas || window.matchMedia("(max-width: 900px)").matches) {
-      return;
-    }
-
-    resizeHeroCanvas();
-
-    var rect = hero.getBoundingClientRect();
-    var scrollable = hero.offsetHeight - window.innerHeight;
-    var progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-    var frame = Math.min(frameCount - 1, Math.round(progress * (frameCount - 1)));
-
-    if (frame !== currentFrame) {
-      currentFrame = frame;
-      loadFrame(frame, true);
-    }
-  }
 
   function updateHeader() {
     if (!header) {
@@ -390,16 +287,14 @@
         if (feedback) feedback.style.display = "none";
 
         var formData = new FormData(contactForm);
-        var inquiryVal = formData.get("inquiryType") || "general";
         var payload = {
-          formType: inquiryVal === "join" ? "join-club" : "contact",
+          formType: "submission",
           name: formData.get("name") || "",
           email: formData.get("email") || "",
           phone: formData.get("phone") || "",
           location: formData.get("location") || "",
-          inquiryType: inquiryVal,
-          message: formData.get("message") || "",
-          goals: formData.get("message") || ""
+          inquiryType: formData.get("inquiryType") || "",
+          message: formData.get("message") || ""
         };
 
         fetch(GOOGLE_SCRIPT_URL, {
@@ -443,8 +338,13 @@
 
         if (btn) btn.disabled = true;
         var payload = {
-          formType: "newsletter",
-          email: emailInput ? emailInput.value : ""
+          formType: "submission",
+          name: "",
+          email: emailInput ? emailInput.value : "",
+          phone: "",
+          location: "",
+          inquiryType: "newsletter",
+          message: ""
         };
 
         fetch(GOOGLE_SCRIPT_URL, {
@@ -509,11 +409,12 @@
 
         var formData = new FormData(form);
         var payload = {
-          formType: "visitor-lead",
+          formType: "submission",
           name: formData.get("name") || "",
           email: formData.get("email") || "",
           phone: formData.get("phone") || "",
-          page: window.location.pathname
+          inquiryType: formData.get("inquiryType") || "forager",
+          message: ""
         };
 
         fetch(GOOGLE_SCRIPT_URL, {
@@ -537,18 +438,10 @@
 
   window.addEventListener("scroll", function () {
     window.requestAnimationFrame(function () {
-      updateHero();
       updateHeader();
     });
   });
 
-  window.addEventListener("resize", function () {
-    resizeHeroCanvas();
-    updateHero();
-  });
-
-  preloadHero();
-  updateHero();
   updateHeader();
   initMenu();
   initLegalModals();

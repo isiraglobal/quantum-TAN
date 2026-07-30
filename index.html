@@ -36,9 +36,12 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-label="QuantumAggForage scroll animation" data-hero>
-        <canvas class="hero-canvas" width="1920" height="1080" data-hero-canvas></canvas>
-        <img class="hero-mobile" src="assets/animation/mobile/opening-sequence-mobile-3_2.gif" alt="Foraging animation">
+      <section class="hero" aria-label="QuantumAggForage background video">
+        <div class="hero-video-wrapper">
+          <video class="hero-video" autoplay muted loop playsinline poster="assets/animation/mobile/opening-sequence-mobile-3_2.gif">
+            <source src="background.mp4" type="video/mp4">
+          </video>
+        </div>
       </section>
 
       <section id="immerseyourself" class="immersive image-band dark-section">
@@ -158,24 +161,16 @@
               <label>Inquiry Type</label>
               <div class="form-radio-group">
                 <label class="form-radio">
-                  <input type="radio" name="inquiryType" value="join">
-                  <span class="form-radio-label">Join the Club</span>
+                  <input type="radio" name="inquiryType" value="forager" checked>
+                  <span class="form-radio-label">Join the community (forager)</span>
                 </label>
                 <label class="form-radio">
-                  <input type="radio" name="inquiryType" value="general" checked>
-                  <span class="form-radio-label">General</span>
+                  <input type="radio" name="inquiryType" value="property-owner">
+                  <span class="form-radio-label">Partner with us (Property owner)</span>
                 </label>
                 <label class="form-radio">
-                  <input type="radio" name="inquiryType" value="private-forage">
-                  <span class="form-radio-label">Private Forage</span>
-                </label>
-                <label class="form-radio">
-                  <input type="radio" name="inquiryType" value="corporate">
-                  <span class="form-radio-label">Corporate Event</span>
-                </label>
-                <label class="form-radio">
-                  <input type="radio" name="inquiryType" value="partnership">
-                  <span class="form-radio-label">Partnership</span>
+                  <input type="radio" name="inquiryType" value="master-forager">
+                  <span class="form-radio-label">I'm a master forager ready to teach</span>
                 </label>
               </div>
             </div>
@@ -273,6 +268,23 @@
           <div class="lead-field-group">
             <label for="leadPhone">Phone Number</label>
             <input type="tel" id="leadPhone" name="phone" class="lead-input" placeholder="(555) 000-0000" autocomplete="tel">
+          </div>
+          <div class="lead-field-group">
+            <label>I'm interested in</label>
+            <div class="form-radio-group">
+              <label class="form-radio">
+                <input type="radio" name="inquiryType" value="forager" checked>
+                <span class="form-radio-label">Join the community (forager)</span>
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="inquiryType" value="property-owner">
+                <span class="form-radio-label">Partner with us (Property owner)</span>
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="inquiryType" value="master-forager">
+                <span class="form-radio-label">I'm a master forager ready to teach</span>
+              </label>
+            </div>
           </div>
           <button type="submit" class="lead-submit-btn" id="leadSubmitBtn">
             <span class="submit-text">JOIN THE COMMUNITY</span>
