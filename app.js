@@ -413,7 +413,8 @@
           name: formData.get("name") || "",
           email: formData.get("email") || "",
           phone: formData.get("phone") || "",
-          inquiryType: formData.get("inquiryType") || "forager",
+          location: "",
+          inquiryType: "popup",
           message: ""
         };
 
