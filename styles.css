@@ -1156,6 +1156,40 @@ h3 {
   background: rgba(255, 255, 255, 0.08);
 }
 
+.form-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(203, 191, 179, 0.25);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.form-radio:has(input:checked) {
+  border-color: var(--gold);
+  background: rgba(169, 131, 73, 0.15);
+  color: var(--paper);
+}
+
+.form-radio input {
+  display: none;
+}
+
+.form-radio-label {
+  font-size: 0.9rem;
+}
+
 .submit-btn {
   align-self: flex-start;
   padding: 1rem 2.5rem;

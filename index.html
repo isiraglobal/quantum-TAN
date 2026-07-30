@@ -134,14 +134,29 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="inquiryType">Inquiry Type</label>
-              <select id="inquiryType" name="inquiryType" class="form-select">
-                <option value="join">Join the Club</option>
-                <option value="general">General Inquiry</option>
-                <option value="private-forage">Private Forage</option>
-                <option value="corporate">Corporate Event</option>
-                <option value="partnership">Partnership</option>
-              </select>
+              <label>Inquiry Type</label>
+              <div class="form-radio-group">
+                <label class="form-radio">
+                  <input type="radio" name="inquiryType" value="join">
+                  <span class="form-radio-label">Join the Club</span>
+                </label>
+                <label class="form-radio">
+                  <input type="radio" name="inquiryType" value="general" checked>
+                  <span class="form-radio-label">General</span>
+                </label>
+                <label class="form-radio">
+                  <input type="radio" name="inquiryType" value="private-forage">
+                  <span class="form-radio-label">Private Forage</span>
+                </label>
+                <label class="form-radio">
+                  <input type="radio" name="inquiryType" value="corporate">
+                  <span class="form-radio-label">Corporate Event</span>
+                </label>
+                <label class="form-radio">
+                  <input type="radio" name="inquiryType" value="partnership">
+                  <span class="form-radio-label">Partnership</span>
+                </label>
+              </div>
             </div>
             <div class="form-group">
               <label for="contactMessage">Message / Goals *</label>
@@ -164,11 +179,7 @@
           <div class="footer-copy">
             <p>Subscribe for foraging tips, seasonal wild harvesting guides &amp; community updates across NJ, PA, NY &amp; FL.</p>
           </div>
-          <div class="socials">
-            <a href="mailto:hello@quantumaggforage.com" aria-label="Email">
-              <img src="assets/icons/email.svg" alt="Email">
-            </a>
-          </div>
+          <div class="socials"></div>
           <div class="footer-legal" style="margin-top: 1rem; font-size: 0.85rem;">
             <a href="#" id="privacyLink">Privacy Policy</a> &bull; <a href="#" id="termsLink">Terms of Service</a>
           </div>
