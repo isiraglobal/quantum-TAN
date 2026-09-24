@@ -1,128 +1,327 @@
 (function () {
-  var header = document.querySelector("[data-header]");
-  var menuToggle = document.querySelector("[data-menu-toggle]");
-  var nav = document.querySelector("[data-nav]");
-  var lastScrollY = window.scrollY;
-  var headerHideThreshold = 80;
+  'use strict';
 
-  function updateHeader() {
-    if (!header) {
-      return;
-    }
-
-    var currentScrollY = Math.max(0, window.scrollY);
-    var isScrollingDown = currentScrollY > lastScrollY;
-    var isMenuOpen = nav && nav.classList.contains("is-open");
-    var shouldHide = isScrollingDown && currentScrollY > headerHideThreshold && !isMenuOpen;
-
-    header.classList.toggle("is-hidden", shouldHide);
-    header.classList.toggle("is-solid", currentScrollY > window.innerHeight * 0.85);
-    lastScrollY = currentScrollY;
+  // ==========================================================================
+  // Utility Functions
+  // ==========================================================================
+  function $(selector, context = document) {
+    return context.querySelector(selector);
   }
 
-  function initMenu() {
-    if (!menuToggle || !nav) {
-      return;
-    }
-
-    menuToggle.addEventListener("click", function () {
-      var isOpen = nav.classList.toggle("is-open");
-      menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-
-    nav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        nav.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
+  function $$(selector, context = document) {
+    return Array.from(context.querySelectorAll(selector));
   }
 
-  // ====== Toast Notifications ======
-  function showToast(msg, type) {
-    var container = document.getElementById("toastContainer");
+  function createElement(tag, attrs = {}, children = []) {
+    const el = document.createElement(tag);
+    Object.entries(attrs).forEach(([key, value]) => {
+      if (key === 'class') el.className = value;
+      else if (key === 'style') Object.assign(el.style, value);
+      else if (key.startsWith('on') && typeof value === 'function') el.addEventListener(key.slice(2), value);
+      else if (key === 'dataset') Object.entries(value).forEach(([k, v]) => el.dataset[k] = v);
+      else el.setAttribute(key, value);
+    });
+    children.forEach(child => {
+      if (typeof child === 'string') el.appendChild(document.createTextNode(child));
+      else if (child instanceof Node) el.appendChild(child);
+    });
+    return el;
+  }
+
+  function showToast(message, type = 'success') {
+    const container = $('#toastContainer');
     if (!container) return;
-    var el = document.createElement("div");
-    el.className = "toast toast-" + (type || "success");
-    el.textContent = msg;
-    container.appendChild(el);
-    window.setTimeout(function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
-    }, 4000);
+    const toast = createElement('div', {
+      class: `toast toast--${type}`,
+      role: 'alert',
+      'aria-live': 'polite'
+    }, [message]);
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
   }
 
-  // ====== Legal Modals ======
   function showModal(id) {
-    var el = document.getElementById(id);
-    if (el) {
-      el.style.display = "block";
-      document.body.style.overflow = "hidden";
+    const modal = $(`#${id}`);
+    if (modal) {
+      modal.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusable) focusable.focus();
     }
   }
-  window.showModal = showModal;
 
   function closeModal(id) {
-    var el = document.getElementById(id);
-    if (el) {
-      el.style.display = "none";
-      document.body.style.overflow = "";
+    const modal = $(`#${id}`);
+    if (modal) {
+      modal.classList.remove('is-visible');
+      document.body.style.overflow = '';
     }
   }
-  window.closeModal = closeModal;
 
-  function initLegalModals() {
-    var privacyLink = document.getElementById("privacyLink");
-    var termsLink = document.getElementById("termsLink");
-
-    if (privacyLink) {
-      privacyLink.addEventListener("click", function (e) {
-        e.preventDefault();
-        showModal("privacyModal");
-      });
-    }
-
-    if (termsLink) {
-      termsLink.addEventListener("click", function (e) {
-        e.preventDefault();
-        showModal("termsModal");
-      });
-    }
-
-    document.querySelectorAll(".modal-overlay").forEach(function (overlay) {
-      overlay.addEventListener("click", function (e) {
+  function initModals() {
+    $$('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal(overlay.id);
       });
     });
 
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        document.querySelectorAll(".modal-overlay").forEach(function (m) {
-          if (m.style.display === "block") closeModal(m.id);
+    $$('.modal-close').forEach(btn => {
+      btn.addEventListener('click', () => closeModal(btn.closest('.modal-overlay').id));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        $$('.modal-overlay.is-visible').forEach(m => closeModal(m.id));
+      }
+    });
+
+    $('#privacyLink')?.addEventListener('click', e => { e.preventDefault(); showModal('privacyModal'); });
+    $('#termsLink')?.addEventListener('click', e => { e.preventDefault(); showModal('termsModal'); });
+  }
+
+  // ==========================================================================
+  // Header & Navigation
+  // ==========================================================================
+  function initHeader() {
+    const header = $('.site-header');
+    const menuToggle = $('[data-menu-toggle]');
+    const nav = $('[data-nav]');
+    let lastScrollY = window.scrollY;
+
+    function updateHeader() {
+      const currentScrollY = Math.max(0, window.scrollY);
+      const isScrollingDown = currentScrollY > lastScrollY;
+      const isMenuOpen = nav?.classList.contains('is-open');
+      const shouldHide = isScrollingDown && currentScrollY > 80 && !isMenuOpen;
+
+      header?.classList.toggle('hidden', shouldHide);
+      header?.classList.toggle('scrolled', currentScrollY > 50);
+      lastScrollY = currentScrollY;
+    }
+
+    if (menuToggle && nav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      $$('a', nav).forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('is-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
         });
+      });
+    }
+
+    window.addEventListener('scroll', () => requestAnimationFrame(updateHeader), { passive: true });
+    updateHeader();
+  }
+
+  // ==========================================================================
+  // Lead Capture Modal
+  // ==========================================================================
+  function initLeadModal() {
+    const modal = $('#leadModal');
+    const closeBtn = $('#leadCloseBtn');
+    const skipBtn = $('#leadSkipBtn');
+    const form = $('#leadModalForm');
+    const submitBtn = $('#leadSubmitBtn');
+
+    if (!modal) return;
+
+    const hasSeenModal = sessionStorage.getItem('qaf_modal_seen');
+    if (!hasSeenModal) {
+      setTimeout(() => {
+        modal.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+        $('#leadName')?.focus();
+      }, 1200);
+    }
+
+    function hideModal() {
+      modal.classList.remove('is-visible');
+      document.body.style.overflow = '';
+      sessionStorage.setItem('qaf_modal_seen', 'true');
+    }
+
+    closeBtn?.addEventListener('click', hideModal);
+    skipBtn?.addEventListener('click', hideModal);
+    modal.addEventListener('click', e => { if (e.target === modal) hideModal(); });
+
+    form?.addEventListener('submit', async e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Signing up...</span>';
+
+      const formData = new FormData(form);
+      const payload = {
+        formType: 'submission',
+        name: formData.get('name') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        location: '',
+        inquiryType: 'popup',
+        message: ''
+      };
+
+      try {
+        await submitForm(payload);
+        showToast('Welcome to the community!', 'success');
+        hideModal();
+        form.reset();
+      } catch (err) {
+        showToast('Something went wrong. Please try again.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Join the Community</span>';
       }
     });
   }
 
-  // ====== Interactive Map (Leaflet) ======
-  var map = null;
-  var userMarker = null;
-  var userCircle = null;
-  var currentTool = "pin";
+  // ==========================================================================
+  // Form Submission
+  // ==========================================================================
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6kcPiiVogv0eW28pp8-FDfIoNsv7QdPfJGjUqasz4YO8oFdcml55CxktgKHPqcJdUxg/exec';
+
+  async function submitForm(payload) {
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (!response.ok || result.success === false) {
+      throw new Error(result.error || 'Submission failed');
+    }
+    return result;
+  }
+
+  function initForms() {
+    // Contact Form
+    const contactForm = $('#contactForm');
+    const contactSubmitBtn = $('#contactSubmitBtn');
+    const contactFeedback = $('#contactFeedback');
+
+    contactForm?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btnText = contactSubmitBtn?.querySelector('.btn-text');
+      const btnSpinner = contactSubmitBtn?.querySelector('.btn-spinner');
+
+      if (contactSubmitBtn) contactSubmitBtn.disabled = true;
+      if (btnText) btnText.textContent = 'Sending...';
+      if (btnSpinner) btnSpinner.style.display = 'inline-block';
+      if (contactFeedback) { contactFeedback.style.display = 'none'; contactFeedback.className = 'form-feedback'; }
+
+      const formData = new FormData(contactForm);
+      const payload = {
+        formType: 'submission',
+        name: formData.get('name') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        location: formData.get('location') || '',
+        inquiryType: formData.get('inquiryType') || '',
+        message: formData.get('message') || ''
+      };
+
+      try {
+        await submitForm(payload);
+        if (contactFeedback) {
+          contactFeedback.style.display = 'block';
+          contactFeedback.className = 'form-feedback form-feedback--success';
+          contactFeedback.textContent = 'Thank you! Your message has been sent. A chapter lead will be in touch soon.';
+        }
+        contactForm.reset();
+      } catch (err) {
+        if (contactFeedback) {
+          contactFeedback.style.display = 'block';
+          contactFeedback.className = 'form-feedback form-feedback--error';
+          contactFeedback.textContent = 'Something went wrong. Please try again or email us directly.';
+        }
+      } finally {
+        if (contactSubmitBtn) contactSubmitBtn.disabled = false;
+        if (btnText) btnText.textContent = 'Submit';
+        if (btnSpinner) btnSpinner.style.display = 'none';
+      }
+    });
+
+    // Newsletter Form
+    const newsletterForm = $('#newsletterForm');
+    const newsletterSubmitBtn = $('#newsletterSubmitBtn');
+    const newsletterFeedback = $('#newsletterFeedback');
+
+    newsletterForm?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const emailInput = $('#newsletterEmail');
+
+      if (newsletterSubmitBtn) newsletterSubmitBtn.disabled = true;
+
+      const payload = {
+        formType: 'submission',
+        name: '',
+        email: emailInput?.value || '',
+        phone: '',
+        location: '',
+        inquiryType: 'newsletter',
+        message: ''
+      };
+
+      try {
+        await submitForm(payload);
+        if (newsletterFeedback) {
+          newsletterFeedback.style.display = 'block';
+          newsletterFeedback.className = 'form-feedback form-feedback--success';
+          newsletterFeedback.textContent = 'Subscribed successfully!';
+        }
+        newsletterForm.reset();
+      } catch (err) {
+        if (newsletterFeedback) {
+          newsletterFeedback.style.display = 'block';
+          newsletterFeedback.className = 'form-feedback form-feedback--error';
+          newsletterFeedback.textContent = 'Something went wrong. Please try again.';
+        }
+      } finally {
+        if (newsletterSubmitBtn) newsletterSubmitBtn.disabled = false;
+      }
+    });
+
+    // Footer year
+    const footerYear = $('#footerYear');
+    if (footerYear) footerYear.textContent = new Date().getFullYear();
+  }
+
+  // ==========================================================================
+  // Interactive Map (Leaflet)
+  // ==========================================================================
+  let map = null;
+  let userMarker = null;
+  let userCircle = null;
+  let currentTool = 'pin';
 
   function loadLeaflet(cb) {
-    if (window.L) {
-      cb();
-      return;
-    }
-    var script = document.createElement("script");
-    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    if (window.L) { cb(); return; }
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+    script.crossOrigin = '';
     script.onload = cb;
     document.body.appendChild(script);
   }
 
   function saveUserPin(latlng) {
     try {
-      localStorage.setItem("qaf_user_pin", JSON.stringify({ lat: latlng.lat, lng: latlng.lng }));
+      localStorage.setItem('qaf_user_pin', JSON.stringify({ lat: latlng.lat, lng: latlng.lng }));
+    } catch (e) {}
+  }
+
+  function loadUserPin() {
+    try {
+      const raw = localStorage.getItem('qaf_user_pin');
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (data.lat && data.lng && window.L) {
+          placeUserPin(L.latLng(data.lat, data.lng));
+        }
+      }
     } catch (e) {}
   }
 
@@ -133,335 +332,254 @@
       userMarker.setLatLng(latlng);
     } else {
       userMarker = L.marker(latlng, { draggable: true }).addTo(map);
-      userMarker.bindPopup("<b>Your Forage Spot</b><br>Drag to adjust.");
-      userMarker.on("dragend", function () {
-        var pos = userMarker.getLatLng();
+      userMarker.bindPopup('<strong>Your Foraging Area</strong><br>Drag to adjust. Click "Set Range" to change radius.');
+      userMarker.on('dragend', () => {
+        const pos = userMarker.getLatLng();
         if (userCircle) userCircle.setLatLng(pos);
         saveUserPin(pos);
-        showToast("Pin location updated!", "success");
+        updateCoordDisplay(pos);
+        showToast('Pin location updated', 'success');
       });
     }
 
-    var radiusMeters = 25 * 1609.34;
+    const radiusMeters = 25 * 1609.34; // 25 miles default
     if (userCircle) {
       userCircle.setLatLng(latlng);
       userCircle.setRadius(radiusMeters);
     } else {
       userCircle = L.circle(latlng, {
         radius: radiusMeters,
-        color: "#a98349",
-        fillColor: "rgba(169, 131, 73, 0.15)",
+        color: '#6b8e68',
+        fillColor: 'rgba(107, 142, 104, 0.15)',
         weight: 2,
         opacity: 0.8,
         fillOpacity: 0.2
       }).addTo(map);
     }
 
-    map.setView(latlng, Math.max(map.getZoom(), 9));
+    map.setView(latlng, Math.max(map.getZoom(), 8));
     saveUserPin(latlng);
+    updateCoordDisplay(latlng);
 
-    var removeBtn = document.getElementById("removeMapPin");
-    if (removeBtn) removeBtn.style.display = "inline-block";
-  }
-
-  function loadUserPin() {
-    try {
-      var raw = localStorage.getItem("qaf_user_pin");
-      if (raw) {
-        var data = JSON.parse(raw);
-        if (data.lat && data.lng && window.L) {
-          placeUserPin(L.latLng(data.lat, data.lng));
-        }
-      }
-    } catch (e) {}
+    $('#removeMapPin')?.style.setProperty('display', 'inline-flex', 'important');
+    setRadiusToolState(false);
   }
 
   function removeUserPin() {
-    if (userMarker) {
-      map.removeLayer(userMarker);
-      userMarker = null;
+    if (userMarker) { map.removeLayer(userMarker); userMarker = null; }
+    if (userCircle) { map.removeLayer(userCircle); userCircle = null; }
+    try { localStorage.removeItem('qaf_user_pin'); } catch (e) {}
+    $('#removeMapPin')?.style.setProperty('display', 'none', 'important');
+    $('#coordDisplay').textContent = 'No location selected';
+    $('#radiusDisplay').style.display = 'none';
+    showToast('Pin removed', 'success');
+    setPinToolState(true);
+  }
+
+  function updateCoordDisplay(latlng) {
+    const coordDisplay = $('#coordDisplay');
+    const radiusDisplay = $('#radiusDisplay');
+    if (coordDisplay) {
+      coordDisplay.textContent = `📍 ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}`;
     }
-    if (userCircle) {
-      map.removeLayer(userCircle);
-      userCircle = null;
+    if (radiusDisplay && userCircle) {
+      const miles = (userCircle.getRadius() / 1609.34).toFixed(0);
+      radiusDisplay.textContent = `📏 ${miles} mile radius`;
+      radiusDisplay.style.display = 'inline';
     }
-    try {
-      localStorage.removeItem("qaf_user_pin");
-    } catch (e) {}
-    var removeBtn = document.getElementById("removeMapPin");
-    if (removeBtn) removeBtn.style.display = "none";
-    showToast("Pin removed.", "success");
+  }
+
+  function setPinToolState(active) {
+    const pinBtn = $('#pinTool');
+    const radiusBtn = $('#radiusTool');
+    if (pinBtn) {
+      pinBtn.classList.toggle('active', active);
+      pinBtn.setAttribute('aria-pressed', active);
+    }
+    if (radiusBtn) {
+      radiusBtn.classList.toggle('active', !active);
+      radiusBtn.setAttribute('aria-pressed', !active);
+    }
+    currentTool = active ? 'pin' : 'radius';
+  }
+
+  function setRadiusToolState(active) {
+    setPinToolState(!active);
   }
 
   function initMap() {
-    var container = document.getElementById("map");
+    const container = $('#map');
     if (!container || map) return;
 
-    loadLeaflet(function () {
-      map = L.map("map", {
-        center: [40.5, -74.5],
-        zoom: 7,
-        zoomControl: true
+    loadLeaflet(() => {
+      map = L.map('map', {
+        center: [39.5, -76.5],
+        zoom: 6,
+        zoomControl: true,
+        scrollWheelZoom: true
       });
 
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      map.on("click", function (e) {
-        if (currentTool === "pin") {
+      // Map click handler
+      map.on('click', e => {
+        if (currentTool === 'pin') {
           placeUserPin(e.latlng);
-          showToast("Pin dropped!", "success");
+          showToast('Pin dropped', 'success');
         }
       });
 
-      var pinBtn = document.getElementById("pinTool");
-      var radiusBtn = document.getElementById("radiusTool");
-      var removeBtn = document.getElementById("removeMapPin");
-      var exportBtn = document.getElementById("exportMap");
+      // Toolbar buttons
+      const pinBtn = $('#pinTool');
+      const radiusBtn = $('#radiusTool');
+      const removeBtn = $('#removeMapPin');
+      const exportBtn = $('#exportMap');
 
-      if (pinBtn) {
-        pinBtn.addEventListener("click", function () {
-          currentTool = "pin";
-          pinBtn.classList.add("active");
-          if (radiusBtn) radiusBtn.classList.remove("active");
-        });
-      }
-
-      if (radiusBtn) {
-        radiusBtn.addEventListener("click", function () {
-          currentTool = "radius";
-          radiusBtn.classList.add("active");
-          if (pinBtn) pinBtn.classList.remove("active");
-          showToast("Click on map or adjust pin to set range circle.", "success");
-        });
-      }
-
-      if (removeBtn) {
-        removeBtn.addEventListener("click", function () {
-          removeUserPin();
-        });
-      }
-
-      if (exportBtn) {
-        exportBtn.addEventListener("click", function () {
-          if (!userMarker) {
-            showToast("Drop a pin on the map first!", "error");
-            return;
-          }
-          var latlng = userMarker.getLatLng();
-          var gpx = '<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="QuantumAggForage" xmlns="http://www.topografix.com/GPX/1/1">\n  <wpt lat="' + latlng.lat + '" lon="' + latlng.lng + '">\n    <name>My Forage Spot</name>\n  </wpt>\n</gpx>';
-          var blob = new Blob([gpx.trim()], { type: "application/gpx+xml" });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement("a");
-          a.href = url;
-          a.download = "my-forage-spot.gpx";
-          a.click();
-          URL.revokeObjectURL(url);
-          showToast("GPX file downloaded successfully!", "success");
-        });
-      }
+      pinBtn?.addEventListener('click', () => setPinToolState(true));
+      radiusBtn?.addEventListener('click', () => {
+        setPinToolState(false);
+        if (!userMarker) {
+          showToast('Drop a pin first, then set your range', 'success');
+        } else {
+          showToast('Drag the pin to adjust center, or re-click map', 'success');
+        }
+      });
+      removeBtn?.addEventListener('click', removeUserPin);
+      exportBtn?.addEventListener('click', exportGPX);
 
       loadUserPin();
-      window.setTimeout(function () { map.invalidateSize(); }, 300);
+
+      // Ensure map renders correctly
+      setTimeout(() => map.invalidateSize(), 100);
+      setTimeout(() => map.invalidateSize(), 500);
     });
   }
 
-  // Google Apps Script Form Submission Logic
-  var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6kcPiiVogv0eW28pp8-FDfIoNsv7QdPfJGjUqasz4YO8oFdcml55CxktgKHPqcJdUxg/exec";
-
-  function initForms() {
-    var contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-      contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var btn = document.getElementById("contactSubmitBtn");
-        var feedback = document.getElementById("contactFeedback");
-        var btnText = btn ? btn.querySelector(".btn-text") : null;
-        var btnSpinner = btn ? btn.querySelector(".btn-spinner") : null;
-
-        if (btn) btn.disabled = true;
-        if (btnText) btnText.textContent = "SENDING...";
-        if (btnSpinner) btnSpinner.style.display = "inline-block";
-        if (feedback) feedback.style.display = "none";
-
-        var formData = new FormData(contactForm);
-        var payload = {
-          formType: "submission",
-          name: formData.get("name") || "",
-          email: formData.get("email") || "",
-          phone: formData.get("phone") || "",
-          location: formData.get("location") || "",
-          inquiryType: formData.get("inquiryType") || "",
-          message: formData.get("message") || ""
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify(payload)
-        })
-          .then(function (res) { return res.json(); })
-          .then(function (result) {
-            if (btn) btn.disabled = false;
-            if (btnText) btnText.textContent = "SUBMIT";
-            if (btnSpinner) btnSpinner.style.display = "none";
-            if (feedback) {
-              feedback.style.display = "block";
-              feedback.className = "form-feedback success";
-              feedback.textContent = result.message || "Thank you! Your message has been sent successfully.";
-            }
-            contactForm.reset();
-          })
-          .catch(function () {
-            if (btn) btn.disabled = false;
-            if (btnText) btnText.textContent = "SUBMIT";
-            if (btnSpinner) btnSpinner.style.display = "none";
-            if (feedback) {
-              feedback.style.display = "block";
-              feedback.className = "form-feedback success";
-              feedback.textContent = "Thank you! Your submission has been received.";
-            }
-            contactForm.reset();
-          });
-      });
+  function exportGPX() {
+    if (!userMarker) {
+      showToast('Drop a pin on the map first', 'error');
+      return;
     }
+    const latlng = userMarker.getLatLng();
+    const radius = userCircle ? userCircle.getRadius() : 0;
+    const miles = (radius / 1609.34).toFixed(1);
 
-    var newsletterForm = document.getElementById("newsletterForm");
-    if (newsletterForm) {
-      newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var emailInput = document.getElementById("newsletterEmail");
-        var btn = document.getElementById("newsletterSubmitBtn");
-        var feedback = document.getElementById("newsletterFeedback");
+    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="QuantumAggForage" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>QuantumAggForage Foraging Area</name>
+    <desc>Foraging location and travel radius exported from QuantumAggForage</desc>
+    <author><name>QuantumAggForage</name></author>
+  </metadata>
+  <wpt lat="${latlng.lat}" lon="${latlng.lng}">
+    <name>My Foraging Spot</name>
+    <desc>Center point for foraging activities</desc>
+  </wpt>
+  ${radius > 0 ? `<rte>
+    <name>Travel Radius (${miles} miles)</name>
+    <desc>Approximate circular travel area</desc>
+    <rtept lat="${latlng.lat}" lon="${latlng.lng}"><name>Center</name></rtept>
+  </rte>` : ''}
+</gpx>`;
 
-        if (btn) btn.disabled = true;
-        var payload = {
-          formType: "submission",
-          name: "",
-          email: emailInput ? emailInput.value : "",
-          phone: "",
-          location: "",
-          inquiryType: "newsletter",
-          message: ""
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify(payload)
-        })
-          .then(function () {
-            if (btn) btn.disabled = false;
-            if (feedback) {
-              feedback.style.display = "block";
-              feedback.className = "form-feedback success";
-              feedback.textContent = "Subscribed successfully!";
-            }
-            newsletterForm.reset();
-          })
-          .catch(function () {
-            if (btn) btn.disabled = false;
-            if (feedback) {
-              feedback.style.display = "block";
-              feedback.className = "form-feedback success";
-              feedback.textContent = "Subscribed successfully!";
-            }
-            newsletterForm.reset();
-          });
-      });
-    }
-
-    var footerYear = document.getElementById("footerYear");
-    if (footerYear) footerYear.textContent = new Date().getFullYear();
+    const blob = new Blob([gpx.trim()], { type: 'application/gpx+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-forage-area.gpx';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('GPX file downloaded', 'success');
   }
 
-  function initVisitorModal() {
-    var modal = document.getElementById("leadModal");
-    var closeBtn = document.getElementById("leadCloseBtn");
-    var form = document.getElementById("leadModalForm");
-
-    if (!modal) return;
-
-    function showModal() {
-      modal.classList.add("is-visible");
-    }
-
-    function hideModal() {
-      modal.classList.remove("is-visible");
-    }
-
-    // Trigger popup within 1 second (600ms) on site load or reload
-    window.setTimeout(showModal, 600);
-
-    if (closeBtn) closeBtn.addEventListener("click", hideModal);
-
-    modal.addEventListener("click", function (e) {
-      if (e.target === modal) hideModal();
-    });
-
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var submitBtn = document.getElementById("leadSubmitBtn");
-        if (submitBtn) submitBtn.disabled = true;
-
-        var formData = new FormData(form);
-        var payload = {
-          formType: "submission",
-          name: formData.get("name") || "",
-          email: formData.get("email") || "",
-          phone: formData.get("phone") || "",
-          location: "",
-          inquiryType: "popup",
-          message: ""
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify(payload)
-        })
-          .then(function () {
-            hideModal();
-            form.reset();
-            if (submitBtn) submitBtn.disabled = false;
-          })
-          .catch(function () {
-            hideModal();
-            form.reset();
-            if (submitBtn) submitBtn.disabled = false;
-          });
-      });
-    }
-  }
-
-  window.addEventListener("scroll", function () {
-    window.requestAnimationFrame(function () {
-      updateHeader();
-    });
-  });
-
-  updateHeader();
-  initMenu();
-  initLegalModals();
-  initForms();
-  initVisitorModal();
-
-  if ("IntersectionObserver" in window) {
-    var mapObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
+  // Initialize map when section is visible
+  if ('IntersectionObserver' in window) {
+    const mapObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           initMap();
           mapObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    var mapSection = document.getElementById("map-section");
+    }, { threshold: 0.1, rootMargin: '100px' });
+    const mapSection = $('#map-section');
     if (mapSection) mapObserver.observe(mapSection);
   } else {
     initMap();
   }
-})();
 
+  // ==========================================================================
+  // Smooth Scroll for Anchor Links
+  // ==========================================================================
+  $$('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const targetId = anchor.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  // ==========================================================================
+  // Intersection Observer for Scroll Animations
+  // ==========================================================================
+  function initScrollAnimations() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    $$('.section, .feature-card, .editorial-split > *, .process-step, .map-wrapper, .contact-form').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Add visible class styles dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+      .section.is-visible, .feature-card.is-visible, .editorial-split > *.is-visible, .process-step.is-visible, .map-wrapper.is-visible, .contact-form.is-visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .feature-card { transition-delay: calc(var(--delay, 0) * 100ms); }
+    `;
+    document.head.appendChild(style);
+
+    // Stagger feature cards
+    $$('.feature-card').forEach((card, i) => card.style.setProperty('--delay', i));
+    $$('.process-step').forEach((step, i) => step.style.setProperty('--delay', i));
+  }
+
+  // ==========================================================================
+  // Initialize Everything
+  // ==========================================================================
+  function init() {
+    initHeader();
+    initModals();
+    initLeadModal();
+    initForms();
+    initScrollAnimations();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
