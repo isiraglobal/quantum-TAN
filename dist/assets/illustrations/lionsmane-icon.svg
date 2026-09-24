@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Hericium erinaceus - Lion's Mane -->
+  <g transform="translate(100, 190)">
+    <!-- Cascading spines -->
+    <g stroke-width="1.5" opacity="0.8">
+      <!-- Top row -->
+      <path d="M-40 -40 L-40 -10"/>
+      <path d="M-30 -40 L-30 -10"/>
+      <path d="M-20 -40 L-20 -10"/>
+      <path d="M-10 -40 L-10 -10"/>
+      <path d="M0 -40 L0 -10"/>
+      <path d="M10 -40 L10 -10"/>
+      <path d="M20 -40 L20 -10"/>
+      <path d="M30 -40 L30 -10"/>
+      <path d="M40 -40 L40 -10"/>
+
+      <!-- Middle row - longer -->
+      <path d="M-45 -10 L-45 25" stroke-width="1.2"/>
+      <path d="M-35 -10 L-35 30" stroke-width="1.2"/>
+      <path d="M-25 -10 L-25 35" stroke-width="1.2"/>
+      <path d="M-15 -10 L-15 38" stroke-width="1.2"/>
+      <path d="M-5 -10 L-5 40" stroke-width="1.2"/>
+      <path d="M5 -10 L5 40" stroke-width="1.2"/>
+      <path d="M15 -10 L15 38" stroke-width="1.2"/>
+      <path d="M25 -10 L25 35" stroke-width="1.2"/>
+      <path d="M35 -10 L35 30" stroke-width="1.2"/>
+      <path d="M45 -10 L45 25" stroke-width="1.2"/>
+
+      <!-- Bottom row - longest -->
+      <path d="M-40 20 L-40 50" stroke-width="1"/>
+      <path d="M-30 25 L-30 55" stroke-width="1"/>
+      <path d="M-20 30 L-20 60" stroke-width="1"/>
+      <path d="M-10 35 L-10 62" stroke-width="1"/>
+      <path d="M0 38 L0 65" stroke-width="1"/>
+      <path d="M10 35 L10 62" stroke-width="1"/>
+      <path d="M20 30 L20 60" stroke-width="1"/>
+      <path d="M30 25 L30 55" stroke-width="1"/>
+      <path d="M40 20 L40 50" stroke-width="1"/>
+    </g>
+
+    <!-- Attachment point on wood -->
+    <path d="M-50 -45 Q-50 -55 -10 -55 Q10 -55 50 -45" stroke-width="2" opacity="0.6"/>
+    <path d="M-45 -50 L-45 -60" stroke-width="1" opacity="0.3"/>
+    <path d="M45 -50 L45 -60" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- Wood substrate hint -->
+  <g transform="translate(100, 140)" stroke-width="1" opacity="0.25">
+    <path d="M-60 0 L60 0"/>
+    <path d="M-55 -5 L55 -5"/>
+    <path d="M-50 5 L50 5"/>
+    <path d="M-45 -10 L45 -10"/>
+    <path d="M-40 10 L40 10"/>
+  </g>
+</svg>

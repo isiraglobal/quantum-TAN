@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Morchella - True Morel -->
+  <g transform="translate(100, 185)">
+    <!-- Cap - honeycomb/pitted -->
+    <path d="M-35 -60 Q-35 -85 0 -85 Q35 -85 35 -60 Q35 -45 0 -50 Q-35 -45 -35 -60" fill="none" stroke="currentColor" stroke-width="2.5"/>
+
+    <!-- Pits/ridges pattern -->
+    <g stroke-width="1.2" opacity="0.6">
+      <path d="M-28 -62 Q-28 -72 -14 -75 Q0 -76 14 -75 Q28 -72 28 -62"/>
+      <path d="M-22 -58 Q-22 -66 -11 -68 Q0 -69 11 -68 Q22 -66 22 -58"/>
+      <path d="M-16 -54 Q-16 -60 -8 -62 Q0 -63 8 -62 Q16 -60 16 -54"/>
+      <path d="M-10 -50 Q-10 -54 -5 -55 Q0 -56 5 -55 Q10 -54 10 -50"/>
+
+      <!-- Vertical ridges -->
+      <path d="M-25 -60 L-22 -45"/>
+      <path d="M-15 -62 L-12 -48"/>
+      <path d="M-5 -64 L-3 -50"/>
+      <path d="M5 -64 L3 -50"/>
+      <path d="M15 -62 L12 -48"/>
+      <path d="M25 -60 L22 -45"/>
+    </g>
+
+    <!-- Hollow stem -->
+    <path d="M-12 -45 L-10 25" stroke-width="2.5"/>
+    <path d="M12 -45 L10 25" stroke-width="2.5"/>
+
+    <!-- Stem texture - granular -->
+    <g stroke-width="0.8" opacity="0.4">
+      <path d="M-11 -40 L-8 -35"/>
+      <path d="M-9 -35 L-6 -30"/>
+      <path d="M-10 -30 L-7 -25"/>
+      <path d="M-9 -25 L-6 -20"/>
+      <path d="M-8 -20 L-5 -15"/>
+      <path d="M11 -40 L8 -35"/>
+      <path d="M9 -35 L6 -30"/>
+      <path d="M10 -30 L7 -25"/>
+      <path d="M9 -25 L6 -20"/>
+      <path d="M8 -20 L5 -15"/>
+    </g>
+
+    <!-- Base - slightly widened -->
+    <path d="M-14 25 Q-14 30 0 30 Q14 30 14 25" stroke-width="2"/>
+  </g>
+
+  <!-- Forest floor - leaf litter -->
+  <g transform="translate(100, 200)" stroke-width="1" opacity="0.3">
+    <path d="M-30 35 Q-35 45 -25 50"/>
+    <path d="M30 35 Q35 45 25 50"/>
+    <path d="M-15 35 Q-20 48 -10 52"/>
+    <path d="M15 35 Q20 48 10 52"/>
+    <path d="M0 33 Q-5 48 5 50"/>
+    <path d="M-5 38 L-10 50"/>
+    <path d="M5 38 L10 50"/>
+  </g>
+</svg>

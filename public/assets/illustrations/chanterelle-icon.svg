@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Cantharellus cibarius - Golden Chanterelle -->
+  <g transform="translate(100, 185)">
+    <!-- Cap - wavy, funnel-shaped -->
+    <path d="M-40 -30 Q-40 -50 -20 -60 Q0 -65 20 -60 Q40 -50 40 -30 Q30 -10 0 -15 Q-30 -10 -40 -30" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M-30 -40 Q-15 -50 0 -52 Q15 -50 30 -40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+    <path d="M-20 -35 Q-10 -42 0 -43 Q10 -42 20 -35" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+
+    <!-- False gills - forked, decurrent -->
+    <g stroke-width="1.2" opacity="0.7">
+      <path d="M-25 -32 L-15 -5"/>
+      <path d="M-20 -34 L-10 -5"/>
+      <path d="M-15 -35 L-5 -5"/>
+      <path d="M-10 -36 L0 -5"/>
+      <path d="M-5 -36 L5 -5"/>
+      <path d="M0 -36 L10 -5"/>
+      <path d="M5 -36 L15 -5"/>
+      <path d="M10 -35 L20 -5"/>
+      <path d="M15 -34 L25 -5"/>
+      <path d="M20 -32 L30 -5"/>
+    </g>
+
+    <!-- Stem - solid, tapering -->
+    <path d="M-12 -5 L-8 35" stroke-width="2.5"/>
+    <path d="M12 -5 L8 35" stroke-width="2.5"/>
+
+    <!-- Stem texture -->
+    <g stroke-width="0.8" opacity="0.4">
+      <path d="M-10 -2 L-7 10"/>
+      <path d="M-8 5 L-5 20"/>
+      <path d="M-6 12 L-3 28"/>
+      <path d="M10 -2 L7 10"/>
+      <path d="M8 5 L5 20"/>
+      <path d="M6 12 L3 28"/>
+    </g>
+  </g>
+
+  <!-- Moss/forest floor hint -->
+  <g transform="translate(100, 200)" stroke-width="1" opacity="0.3">
+    <path d="M-30 40 L-35 55 L-25 50"/>
+    <path d="M30 40 L35 55 L25 50"/>
+    <path d="M-15 40 L-20 55 L-10 50"/>
+    <path d="M15 40 L20 55 L10 50"/>
+    <path d="M0 38 L-5 55 L5 55"/>
+  </g>
+</svg>

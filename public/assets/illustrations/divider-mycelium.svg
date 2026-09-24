@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+  <!-- Organic divider with mycelium motifs -->
+  <defs>
+    <marker id="spore" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <circle cx="4" cy="4" r="3" fill="currentColor" opacity="0.5"/>
+    </marker>
+  </defs>
+
+  <!-- Main flowing line -->
+  <path d="M50 30 
+           Q200 10 350 30 
+           Q500 50 650 30 
+           Q800 10 950 30 
+           Q1100 50 1150 30" 
+        fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+
+  <!-- Mycelium nodes along the line -->
+  <g fill="currentColor" opacity="0.5">
+    <circle cx="200" cy="30" r="4"/>
+    <circle cx="400" cy="30" r="3"/>
+    <circle cx="600" cy="30" r="4"/>
+    <circle cx="800" cy="30" r="3"/>
+    <circle cx="1000" cy="30" r="4"/>
+  </g>
+
+  <!-- Branching hyphae from nodes -->
+  <g stroke-width="0.8" opacity="0.3">
+    <path d="M200 30 L180 10" marker-end="url(#spore)"/>
+    <path d="M200 30 L220 10" marker-end="url(#spore)"/>
+    <path d="M200 30 L190 50" marker-end="url(#spore)"/>
+    <path d="M200 30 L210 50" marker-end="url(#spore)"/>
+
+    <path d="M400 30 L380 12" marker-end="url(#spore)"/>
+    <path d="M400 30 L420 12" marker-end="url(#spore)"/>
+    <path d="M400 30 L390 48" marker-end="url(#spore)"/>
+    <path d="M400 30 L410 48" marker-end="url(#spore)"/>
+
+    <path d="M600 30 L580 10" marker-end="url(#spore)"/>
+    <path d="M600 30 L620 10" marker-end="url(#spore)"/>
+    <path d="M600 30 L590 50" marker-end="url(#spore)"/>
+    <path d="M600 30 L610 50" marker-end="url(#spore)"/>
+
+    <path d="M800 30 L780 12" marker-end="url(#spore)"/>
+    <path d="M800 30 L820 12" marker-end="url(#spore)"/>
+    <path d="M800 30 L790 48" marker-end="url(#spore)"/>
+    <path d="M800 30 L810 48" marker-end="url(#spore)"/>
+
+    <path d="M1000 30 L980 10" marker-end="url(#spore)"/>
+    <path d="M1000 30 L1020 10" marker-end="url(#spore)"/>
+    <path d="M1000 30 L990 50" marker-end="url(#spore)"/>
+    <path d="M1000 30 L1010 50" marker-end="url(#spore)"/>
+  </g>
+
+  <!-- Floating spores -->
+  <g fill="currentColor" opacity="0.3">
+    <circle cx="150" cy="20" r="1.5"/>
+    <circle cx="250" cy="45" r="1"/>
+    <circle cx="350" cy="15" r="1.5"/>
+    <circle cx="450" cy="40" r="1"/>
+    <circle cx="550" cy="22" r="1.5"/>
+    <circle cx="650" cy="48" r="1"/>
+    <circle cx="750" cy="18" r="1.5"/>
+    <circle cx="850" cy="42" r="1"/>
+    <circle cx="950" cy="25" r="1.5"/>
+    <circle cx="1050" cy="45" r="1"/>
+  </g>
+</svg>

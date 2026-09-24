@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Pleurotus ostreatus - Oyster Mushroom -->
+  <g transform="translate(100, 185)">
+    <!-- Cluster of caps -->
+    <!-- Back cap -->
+    <path d="M-40 -30 Q-40 -50 -10 -55 Q10 -58 30 -50 Q45 -40 40 -30 Q30 -15 0 -20 Q-30 -15 -40 -30" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+
+    <!-- Middle cap -->
+    <path d="M-25 -35 Q-25 -52 0 -57 Q25 -52 25 -35 Q25 -20 0 -25 Q-25 -20 -25 -35" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+
+    <!-- Front cap (main) -->
+    <path d="M-30 -20 Q-30 -45 0 -50 Q30 -45 30 -20 Q25 -5 0 -10 Q-25 -5 -30 -20" fill="none" stroke="currentColor" stroke-width="2.5"/>
+
+    <!-- Gills - decurrent, crowded -->
+    <g stroke-width="1" opacity="0.6">
+      <path d="M-25 -20 L-18 15"/>
+      <path d="M-20 -22 L-14 15"/>
+      <path d="M-15 -24 L-10 15"/>
+      <path d="M-10 -25 L-5 15"/>
+      <path d="M-5 -25 L0 15"/>
+      <path d="M0 -25 L5 15"/>
+      <path d="M5 -25 L10 15"/>
+      <path d="M10 -25 L14 15"/>
+      <path d="M15 -24 L18 15"/>
+      <path d="M20 -22 L22 15"/>
+      <path d="M25 -20 L27 15"/>
+    </g>
+
+    <!-- Short, eccentric stems merging -->
+    <g stroke-width="2" opacity="0.8">
+      <path d="M-8 15 L-6 30"/>
+      <path d="M-2 15 L0 30"/>
+      <path d="M4 15 L6 30"/>
+      <path d="M-10 15 L-8 25"/>
+      <path d="M10 15 L8 25"/>
+    </g>
+
+    <!-- Wood attachment -->
+    <path d="M-35 -30 Q-35 -35 -15 -35 Q15 -35 35 -30" stroke-width="2" opacity="0.4"/>
+    <path d="M-25 -35 L-25 -45" stroke-width="1" opacity="0.2"/>
+    <path d="M25 -35 L25 -45" stroke-width="1" opacity="0.2"/>
+  </g>
+
+  <!-- Bark texture hint -->
+  <g transform="translate(100, 150)" stroke-width="0.8" opacity="0.2">
+    <path d="M-50 -10 L50 -10"/>
+    <path d="M-45 -5 L45 -5"/>
+    <path d="M-40 0 L40 0"/>
+    <path d="M-35 -5 L35 -5"/>
+    <path d="M-30 0 L30 0"/>
+  </g>
+</svg>
